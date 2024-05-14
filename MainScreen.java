@@ -9,8 +9,8 @@ public class MainScreen extends JFrame {
     private JLabel headerLabel = new JLabel("Willkommen zu unserem Quiz!");
     private JButton startButton = new JButton("START");
     private JFrame mainScreenWindow;
-    private JPanel backgroundPanel, quizLogoPanel, inGameBarPanel, questionPanel, answerPanel, questionImagePanel, gameOverPanel, pointsPanel, remarkPanel, medalPanel;
-    private JLabel backgroundLabel, quizLogoLabel, questionLabel, questionNumberLabel, scorLabel, timerLabel, questionImageLabel, gameOverLabel, pointsLabel, remarkLabel, medalLabel;
+    private JPanel backgroundPanel, gameCountdownPanel, quizLogoPanel, inGameBarPanel, questionPanel, answerPanel, questionImagePanel, gameOverPanel, pointsPanel, remarkPanel, medalPanel;
+    private JLabel backgroundLabel, gameCountdownLabel, quizLogoLabel, questionLabel, questionNumberLabel, scorLabel, timerLabel, questionImageLabel, gameOverLabel, pointsLabel, remarkLabel, medalLabel;
     private ImageIcon backgroundImage, quizLogoIcon, gameIcon, questionImageIcon, medalImage;
     private String startBtnSound;
     private final int MAINSCREEN_WIDTH = 1000;
@@ -18,8 +18,11 @@ public class MainScreen extends JFrame {
     private final int QUIZLOGO_WIDTH = 681;
     private final int QUIZLOGO_HEIGHT = 419;
     private JButton answerAButton, answerBButton, answerCButton, answerDButton, nextButton, playAgainButton, exitGameButton;
+    Timer startTimer;
+    int startSecond;
     Timer quizTimer;
     int second;
+
 
     //Constructor 
     public MainScreen() {
@@ -126,7 +129,7 @@ public class MainScreen extends JFrame {
         // Button Listener
         startButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                gameScreenOnClick(e);
+                gameCountDownOnClick(e);
             }
         });
     }
@@ -135,15 +138,80 @@ public class MainScreen extends JFrame {
         new MainScreen();
     }
 
+    //gameCountDown
+    public void gameCountDownOnClick(ActionEvent e) {
+        quizLogoPanel.setVisible(false);
+        startButton.setVisible(false);
+        //Custom Colors
+        Color background = new Color(71, 27, 158);
+
+        gameCountdownPanel = new JPanel();
+        gameCountdownLabel = new JLabel("3");
+
+        try {
+            Font archivo = Font.createFont(Font.TRUETYPE_FONT, new File( ".//fonts//Archivo-VariableFont_wdth,wght.ttf")).deriveFont(120f);
+            GraphicsEnvironment graphicsEnvironment = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            graphicsEnvironment.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File(".//fonts//Archivo-VariableFont_wdth,wght.ttf")));
+            //set custom font for label and button
+            gameCountdownLabel.setFont(archivo);
+
+        } catch (FontFormatException | IOException ex) {
+            ex.printStackTrace();
+        }
+
+        gameCountdownPanel.setBounds((MAINSCREEN_WIDTH / 2) - (700 / 2), (MAINSCREEN_HEIGHT / 2) - (140 / 2), 700, 140);
+        gameCountdownPanel.setBackground(Color.BLACK);
+        gameCountdownPanel.setOpaque(false);
+        gameCountdownLabel.setForeground(Color.WHITE);
+        gameCountdownPanel.add(gameCountdownLabel);
+        mainScreenWindow.add(gameCountdownPanel);
+        startSecond = 3;
+        startTimer();
+        startTimer.start(); 
+
+        //Background
+        backgroundImage = new ImageIcon(".//res//background.jpg");
+        backgroundImage.setImage(backgroundImage.getImage().getScaledInstance(MAINSCREEN_WIDTH, MAINSCREEN_HEIGHT, Image.SCALE_DEFAULT));
+        backgroundPanel = new JPanel();
+        backgroundPanel.setBackground(background);
+        backgroundPanel.setBounds(0, 0, MAINSCREEN_WIDTH, MAINSCREEN_HEIGHT);
+        backgroundLabel = new JLabel();
+        backgroundLabel.setBackground(background);
+        backgroundLabel.setIcon(backgroundImage);
+        backgroundLabel.setBounds(0, 0, MAINSCREEN_WIDTH, MAINSCREEN_HEIGHT);
+        backgroundPanel.add(backgroundLabel);
+        mainScreenWindow.add(backgroundPanel); 
+    }
+
+    public void startTimer() {
+        startTimer = new Timer(1000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                startSecond--;
+                gameCountdownLabel.setText("" + startSecond);
+
+                if (startSecond == 0) {
+                    gameCountdownLabel.setText("LOS!");
+                }
+
+                if (startSecond == -1) {
+                    startTimer.stop();
+                    gameScreenOnClick();
+                }
+            }
+        });
+    }
+
     //game screen
-    public void gameScreenOnClick(ActionEvent e) {
+    public void gameScreenOnClick() {
         //custom Colors
         Color quizImageBorder = new Color(161, 36, 203);
         Color answerText = new Color(122, 31, 182);
         Color background = new Color(71, 27, 158);
+
         //disable logo panel and button
-        quizLogoPanel.setVisible(false);
-        startButton.setVisible(false);
+        gameCountdownPanel.setVisible(false);
+        backgroundPanel.setVisible(false);
 
         inGameBarPanel = new JPanel();
         //increases when next/skipp Button was clicked
@@ -430,7 +498,6 @@ public class MainScreen extends JFrame {
             }
         });
 
-
         //Background
         backgroundImage = new ImageIcon(".//res//background.jpg");
         backgroundImage.setImage(backgroundImage.getImage().getScaledInstance(MAINSCREEN_WIDTH, MAINSCREEN_HEIGHT, Image.SCALE_DEFAULT));
@@ -599,7 +666,7 @@ public class MainScreen extends JFrame {
                 exitGameButton.setVisible(false);
                 backgroundPanel.setVisible(false);
                 quizTimer.stop();
-                gameScreenOnClick(e);
+                gameCountDownOnClick(e);
             }
         });
         mainScreenWindow.add(playAgainButton);
