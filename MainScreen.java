@@ -1,5 +1,4 @@
 import javax.swing.*;
-import javax.swing.plaf.ButtonUI;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
@@ -10,18 +9,18 @@ public class MainScreen extends JFrame {
     private JButton startButton = new JButton("START");
     private JFrame mainScreenWindow;
     private JPanel backgroundPanel, gameCountdownPanel, quizLogoPanel, inGameBarPanel, questionPanel, answerPanel, questionImagePanel, gameOverPanel, pointsPanel, remarkPanel, medalPanel;
-    private JLabel backgroundLabel, gameCountdownLabel, quizLogoLabel, questionLabel, questionNumberLabel, scorLabel, timerLabel, questionImageLabel, gameOverLabel, pointsLabel, remarkLabel, medalLabel;
+    private JLabel backgroundLabel, gameCountdownLabel, quizLogoLabel, questionLabel, questionNumberLabel, scoreLabel, timerLabel, questionImageLabel, gameOverLabel, pointsLabel, remarkLabel, medalLabel;
     private ImageIcon backgroundImage, quizLogoIcon, gameIcon, questionImageIcon, medalImage;
-    private String startBtnSound;
+    private String startTimerSound;
     private final int MAINSCREEN_WIDTH = 1000;
     private final int MAINSCREEN_HEIGHT = 700;
     private final int QUIZLOGO_WIDTH = 681;
     private final int QUIZLOGO_HEIGHT = 419;
     private JButton answerAButton, answerBButton, answerCButton, answerDButton, nextButton, playAgainButton, exitGameButton;
     Timer startTimer;
-    int startSecond;
+    int startSecond, second, scoreCount;
     Timer quizTimer;
-    int second;
+    GameSoundEffect gameSoundEffect = new GameSoundEffect();
 
 
     //Constructor 
@@ -90,17 +89,10 @@ public class MainScreen extends JFrame {
         startButton.setContentAreaFilled(false);
         mainScreenWindow.getContentPane().add(startButton);
 
-        //Path of sound Effect for start button
-        startBtnSound = ".//sounds//start.wav";
-
-        //Start Button
-        StartButtonSoundEffect startButtonSoundEffect = new StartButtonSoundEffect();
         startButton.addMouseListener(new MouseListener() {
         @Override
         public void mousePressed(MouseEvent e) {
             startButton.setBackground(btnColor.darker());
-            startButtonSoundEffect.setFile(startBtnSound);
-                startButtonSoundEffect.startSoundEffect();
         }
 
         @Override
@@ -169,6 +161,12 @@ public class MainScreen extends JFrame {
         startTimer();
         startTimer.start(); 
 
+        startTimerSound = ".//sounds//beforequizstarts.wav";
+        
+        gameSoundEffect.setFile(startTimerSound);
+        gameSoundEffect.startSoundEffect();
+
+
         //Background
         backgroundImage = new ImageIcon(".//res//background.jpg");
         backgroundImage.setImage(backgroundImage.getImage().getScaledInstance(MAINSCREEN_WIDTH, MAINSCREEN_HEIGHT, Image.SCALE_DEFAULT));
@@ -212,12 +210,13 @@ public class MainScreen extends JFrame {
         //disable logo panel and button
         gameCountdownPanel.setVisible(false);
         backgroundPanel.setVisible(false);
+        scoreCount = 0;
 
         inGameBarPanel = new JPanel();
         //increases when next/skipp Button was clicked
         questionNumberLabel = new JLabel("Frage 1 / 15", SwingConstants.CENTER);
         //increases when answer is right and next Button was clicked
-        scorLabel = new JLabel("Punkte: 0", SwingConstants.CENTER);
+        scoreLabel = new JLabel("Punkte: " + scoreCount, SwingConstants.CENTER);
         //restarts when next/skipp Button was clicked
         timerLabel = new JLabel("Zeit: 30", SwingConstants.CENTER);
 
@@ -242,12 +241,11 @@ public class MainScreen extends JFrame {
             graphicsEnvironment.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File(".//fonts//Archivo-VariableFont_wdth,wght.ttf")));
             //set custom font for label and button
             questionNumberLabel.setFont(archivoQuestion);
-            scorLabel.setFont(archivoQuestion);
+            scoreLabel.setFont(archivoQuestion);
             timerLabel.setFont(archivoQuestion);
             
             //startButton.setFont(new Font(startButton.getFont().getName(), startButton.getFont().getStyle(), 22));
             questionLabel.setFont(new Font(questionLabel.getFont().getName(), questionLabel.getFont().getStyle(), 24));
-
             answerAButton.setFont(archivoQuestion);
             answerBButton.setFont(archivoQuestion);
             answerCButton.setFont(archivoQuestion);
@@ -266,14 +264,16 @@ public class MainScreen extends JFrame {
         mainScreenWindow.getContentPane().add(inGameBarPanel);
 
         questionNumberLabel.setForeground(Color.WHITE);
-        scorLabel.setForeground(Color.WHITE);
+        scoreLabel.setForeground(Color.WHITE);
         timerLabel.setForeground(Color.WHITE);
         second = 30;
         quizCountdown();
         quizTimer.start();
 
+
+
         inGameBarPanel.add(questionNumberLabel);
-        inGameBarPanel.add(scorLabel);
+        inGameBarPanel.add(scoreLabel);
         inGameBarPanel.add(timerLabel);
         
         questionPanel.setBounds((MAINSCREEN_WIDTH / 2) - (600 / 2), 90, 600, 40);
@@ -353,12 +353,10 @@ public class MainScreen extends JFrame {
 
             @Override
             public void mouseExited(MouseEvent e) {
-                answerAButton.setBackground(Color.WHITE);
             }
 
             @Override
             public void mouseEntered(MouseEvent e) {
-                answerAButton.setBackground(Color.WHITE.darker());
                 answerAButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
             }
 
@@ -381,12 +379,10 @@ public class MainScreen extends JFrame {
 
             @Override
             public void mouseExited(MouseEvent e) {
-                answerBButton.setBackground(Color.WHITE);
             }
 
             @Override
             public void mouseEntered(MouseEvent e) {
-                answerBButton.setBackground(Color.WHITE.darker());
                 answerBButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
             }
 
@@ -409,12 +405,10 @@ public class MainScreen extends JFrame {
 
             @Override
             public void mouseExited(MouseEvent e) {
-                answerCButton.setBackground(Color.WHITE);
             }
 
             @Override
             public void mouseEntered(MouseEvent e) {
-                answerCButton.setBackground(Color.WHITE.darker());
                 answerCButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
             }
 
@@ -437,12 +431,10 @@ public class MainScreen extends JFrame {
 
             @Override
             public void mouseExited(MouseEvent e) {
-                answerDButton.setBackground(Color.WHITE);
             }
 
             @Override
             public void mouseEntered(MouseEvent e) {
-                answerDButton.setBackground(Color.WHITE.darker());
                 answerDButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
             }
 
@@ -481,7 +473,6 @@ public class MainScreen extends JFrame {
             @Override
             public void mouseEntered(MouseEvent e) {
                 nextButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-                nextButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
             }
 
             @Override
@@ -497,6 +488,42 @@ public class MainScreen extends JFrame {
             public void mouseReleased(MouseEvent e) {
             }
         });
+
+        //Correct and Wrong answer
+        ActionListener actionListener = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JButton chosenAnswer = (JButton) e.getSource();
+                String correctAnswerSoundEffect = ".//sounds//correct.wav";
+                String wrongAnswerSoundEffect = ".//sounds//wrong.wav";
+
+                if (chosenAnswer.getText().equals("Schwarzwälder Kirschtorte")) {
+                    quizTimer.stop();
+                    scoreCount++;
+                    gameSoundEffect.setFile(correctAnswerSoundEffect);
+                    gameSoundEffect.startSoundEffect();
+                    chosenAnswer.setBackground(Color.GREEN);
+                    nextButton.setText("nächste Frage >");
+                    
+                } else {
+                    quizTimer.stop();
+                    gameSoundEffect.setFile(wrongAnswerSoundEffect);
+                    gameSoundEffect.startSoundEffect();
+                    chosenAnswer.setBackground(Color.RED);
+                    nextButton.setText("nächste Frage >");
+                }
+
+                answerAButton.setEnabled(false);
+                answerBButton.setEnabled(false);    
+                answerCButton.setEnabled(false);
+                answerDButton.setEnabled(false);
+            }
+        };
+
+        answerAButton.addActionListener(actionListener);
+        answerBButton.addActionListener(actionListener);
+        answerCButton.addActionListener(actionListener);
+        answerDButton.addActionListener(actionListener);
 
         //Background
         backgroundImage = new ImageIcon(".//res//background.jpg");
@@ -523,6 +550,10 @@ public class MainScreen extends JFrame {
                     quizTimer.stop();
                     answerBButton.setBackground(Color.GREEN);
                     nextButton.setText("nächste Frage >");
+                    answerAButton.setEnabled(false);
+                    answerBButton.setEnabled(false);    
+                    answerCButton.setEnabled(false);
+                    answerDButton.setEnabled(false);
                 } 
                 timerLabel.setText("Zeit: " + second);
             }
@@ -579,6 +610,10 @@ public class MainScreen extends JFrame {
             ex.printStackTrace();
         }
 
+        String endGameSound = ".//sounds//end.wav";
+        gameSoundEffect.setFile(endGameSound);
+        gameSoundEffect.startSoundEffect();
+
         //gameoverPanel
         gameOverPanel.setBounds((MAINSCREEN_WIDTH / 2) - (400 / 2), 80, 400, 40);
         gameOverPanel.setBackground(Color.BLACK);
@@ -598,7 +633,7 @@ public class MainScreen extends JFrame {
         mainScreenWindow.add(pointsPanel);
 
         //pointsLabel
-        pointsLabel.setText("Deine Punkte: 7"); 
+        pointsLabel.setText("Deine Punkte: " + scoreCount); 
         pointsLabel.setForeground(Color.WHITE);
         pointsPanel.add(pointsLabel);
         
@@ -628,6 +663,7 @@ public class MainScreen extends JFrame {
         playAgainButton.setFocusPainted(false);
         playAgainButton.setContentAreaFilled(false);
         playAgainButton.setBounds(100, 550, 200, 30);
+
         playAgainButton.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -678,6 +714,7 @@ public class MainScreen extends JFrame {
         exitGameButton.setFocusPainted(false);
         exitGameButton.setContentAreaFilled(false);
         exitGameButton.setBounds(700, 550, 200, 30);
+
         exitGameButton.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {

@@ -4,10 +4,10 @@ import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 
-public class StartButtonSoundEffect {
+public class GameSoundEffect implements SoundEffect{
     Clip clip;
 
-    //Method to set Audio File for StartButton
+    @Override
     public void setFile(String path) {
         try {
             //create new File and set path
@@ -21,12 +21,9 @@ public class StartButtonSoundEffect {
         }
     }
 
+    @Override
     public void startSoundEffect() {
-        //Start from beginning
         clip.setFramePosition(0);
-        //start audio
         clip.start();
     }
-
-    
 }
