@@ -593,18 +593,6 @@ public class MainScreen extends JFrame {
 
                 if (second == 0) {
                     quizTimer.stop();
-                    switch (fragen.get(fragenIndex-1).getRichtigeAntwort()) {
-                        case 'A':answerAButton.setBackground(Color.GREEN);
-                            break;
-                        case 'B':answerBButton.setBackground(Color.GREEN);
-                            break;
-                        case 'C':answerCButton.setBackground(Color.GREEN);
-                            break;
-                        case 'D':answerDButton.setBackground(Color.GREEN);
-                            break;
-                        default:
-                            break;
-                    }
                     nextButton.setText("nächste Frage >");
                     answerAButton.setEnabled(false);
                     answerBButton.setEnabled(false);    
@@ -692,18 +680,6 @@ public class MainScreen extends JFrame {
         pointsLabel.setForeground(Color.WHITE);
         pointsPanel.add(pointsLabel);
         
-        String path = "";
-        if(scoreCount >= 0 && scoreCount < 4) {
-            remarkLabel.setText("You tired!"); 
-            path=".//res//bronzemedal.png";
-        } else if(scoreCount >= 4  && scoreCount < 8) {
-            remarkLabel.setText("Gut Gemacht!"); 
-            path=".//res//silvermedal.png";
-        } else {
-            remarkLabel.setText("Perfekt!"); 
-            path=".//res//goldmedal.png";
-        }
-        medalImage = new ImageIcon(path);
         //medal
         medalPanel.setBounds((MAINSCREEN_WIDTH / 2) - (160 / 2), 220, 160, 160);
         medalPanel.setOpaque(false);
