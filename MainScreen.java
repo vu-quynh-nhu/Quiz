@@ -668,9 +668,18 @@ public class MainScreen extends JFrame {
         gameOverLabel.setForeground(Color.WHITE);
         gameOverPanel.add(gameOverLabel);
 
+         //remarkPanel
+        remarkPanel.setBounds((MAINSCREEN_WIDTH / 2) - (200 / 2), 390, 200, 40);
+        remarkPanel.setBackground(Color.BLACK);
+        remarkPanel.setOpaque(false);
+        mainScreenWindow.add(remarkPanel);
+
+         //remarkLabel
+        remarkLabel.setForeground(Color.WHITE);
+        remarkPanel.add(remarkLabel);
 
         //pointsPanel
-        pointsPanel.setBounds((MAINSCREEN_WIDTH / 2) - (200 / 2), 170, 200, 40);
+        pointsPanel.setBounds((MAINSCREEN_WIDTH / 2) - (300 / 2), 170, 300, 40);
         pointsPanel.setBackground(Color.BLACK);
         pointsPanel.setOpaque(false);
         mainScreenWindow.add(pointsPanel);
@@ -679,6 +688,20 @@ public class MainScreen extends JFrame {
         pointsLabel.setText("Deine Punkte: " + scoreCount); 
         pointsLabel.setForeground(Color.WHITE);
         pointsPanel.add(pointsLabel);
+
+        String path = "";
+        if (scoreCount >= 0 && scoreCount < 4) {
+            path = ".//res//bronzemedal.png";
+            remarkLabel.setText("You tried"); 
+        } else if (scoreCount > 3 && scoreCount < 7) {
+            path = ".//res.//silvermedal.png";
+            remarkLabel.setText("Gut Gemacht!"); 
+        } else {
+            path = ".//res.//goldmedal.png";
+            remarkLabel.setText("Perfekt!"); 
+        }
+
+        medalImage = new ImageIcon(path);
         
         //medal
         medalPanel.setBounds((MAINSCREEN_WIDTH / 2) - (160 / 2), 220, 160, 160);
@@ -687,16 +710,6 @@ public class MainScreen extends JFrame {
         medalPanel.add(medalLabel);
         medalImage.setImage(medalImage.getImage().getScaledInstance(150, 150, Image.SCALE_DEFAULT));
         medalLabel.setIcon(medalImage);
-
-        //remarkPanel
-        remarkPanel.setBounds((MAINSCREEN_WIDTH / 2) - (200 / 2), 390, 200, 40);
-        remarkPanel.setBackground(Color.BLACK);
-        remarkPanel.setOpaque(false);
-        mainScreenWindow.add(remarkPanel);
-
-        //remarkLabel
-        remarkLabel.setForeground(Color.WHITE);
-        remarkPanel.add(remarkLabel);
 
         //playAgainButton
         playAgainButton.setText("Nochmal spielen");
