@@ -545,6 +545,7 @@ public class MainScreen extends JFrame {
                 if (chosenAnswer.getText().equals(correctAnswer)) {
                     quizTimer.stop();
                     scoreCount++;
+                    scoreLabel.setText("Punkte: " + scoreCount);
                     gameSoundEffect.setFile(correctAnswerSoundEffect);
                     gameSoundEffect.startSoundEffect();
                     chosenAnswer.setBackground(Color.GREEN);
