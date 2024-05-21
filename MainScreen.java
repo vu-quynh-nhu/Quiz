@@ -9,15 +9,15 @@ public class MainScreen extends JFrame {
     private JLabel headerLabel = new JLabel("Willkommen zu unserem Quiz!");
     private JButton startButton = new JButton("START");
     private JFrame mainScreenWindow;
-    private JPanel backgroundPanel, gameCountdownPanel, quizLogoPanel, inGameBarPanel, questionPanel, answerPanel, questionImagePanel, gameOverPanel, pointsPanel, remarkPanel, medalPanel;
-    private JLabel backgroundLabel, gameCountdownLabel, quizLogoLabel, questionLabel, questionNumberLabel, scoreLabel, timerLabel, questionImageLabel, gameOverLabel, pointsLabel, remarkLabel, medalLabel;
+    private JPanel backgroundPanel, choicePanel, gameCountdownPanel, quizLogoPanel, inGameBarPanel, questionPanel, answerPanel, questionImagePanel, gameOverPanel, pointsPanel, remarkPanel, medalPanel;
+    private JLabel backgroundLabel, choiceLabel, gameCountdownLabel, quizLogoLabel, questionLabel, questionNumberLabel, scoreLabel, timerLabel, questionImageLabel, gameOverLabel, pointsLabel, remarkLabel, medalLabel;
     private ImageIcon backgroundImage, quizLogoIcon, gameIcon, questionImageIcon, medalImage;
     private String startTimerSound;
     private final int MAINSCREEN_WIDTH = 1000;
     private final int MAINSCREEN_HEIGHT = 700;
     private final int QUIZLOGO_WIDTH = 681;
     private final int QUIZLOGO_HEIGHT = 419;
-    private JButton answerAButton, answerBButton, answerCButton, answerDButton, nextButton, playAgainButton, exitGameButton;
+    private JButton choice1Button, choice2Button, choice3Button, choice4Button, answerAButton, answerBButton, answerCButton, answerDButton, nextButton, playAgainButton, exitGameButton;
     Timer startTimer;
     int startSecond, second, scoreCount;
     Timer quizTimer;
@@ -125,30 +125,144 @@ public class MainScreen extends JFrame {
         // Button Listener
         startButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                gameCountDownOnClick(e);
+                selectQuestionSet();
             }
         });
-
-        fragen.add(new Frage("Wie heißt dieser Samen?", "Leinsamen","Chiasamen", "Flohsamen", "Quinoa", ".//res//chiasamen.png", 'B'));
-        fragen.add(new Frage("Aus welchem Land stammt dieses Gericht - Shakshuka?", "Italien","Deutschland", "Türkei", "Israel", ".//res//shakshuka.png", 'D'));
-        fragen.add(new Frage("Wie heißt das cremefarbene Gemüse auf der Pizza?", "Lauch","Artischocken", "Blumenkohl", "Champignos", ".//res//pizza.png", 'B'));
-        fragen.add(new Frage("Welches Obst ist botanisch gesehen ein Gemüse?", "Rhabarber","Kiwi", "Erdberre", "Hagebutte", ".//res//gemüse.png", 'A'));
-        fragen.add(new Frage("Was verbirgt sich hinter dem Gericht Kalakukko?", "Japanische Fischsuppe","Sushi mit Thunfisch", "Fisch im Teigmantel", "Fisch in Kohlmantel", ".//res//japan.png", 'C'));
-        fragen.add(new Frage("Haggis gilt als umstrittene Delikatesse in welchem Land?", "Norwegen","Island", "Schottland", "Irland", ".//res//haggis.png", 'C'));
-        fragen.add(new Frage("Das Feijoada ist die Leibspeise vieler …?", "Tunesier","Ukrainer", "Roler", "Brasilianer", ".//res//brasilien.png", 'D'));
-        fragen.add(new Frage("Eine Pho bekommt man in welchen Land serviert?", "Vietnam","Indonesien", "Thailand", "Japan", ".//res//pho.png", 'A'));
-        fragen.add(new Frage("Welches Lebensmittel wird in Deutschland am vielfältiges hergestellt?", "Käse","Wurst", "Brot", "Marmelade", ".//res//brot.png", 'C'));
-        fragen.add(new Frage("Wie nennt sich dieser Salat?", "Mangold","Rucola", "Chicoree", "Endivien", ".//res//mangold.png", 'A'));
     }
 
     public static void main(String[] args) {
         new MainScreen();
     }
 
-    //gameCountDown
-    public void gameCountDownOnClick(ActionEvent e) {
+    public void fragenInialisieren(int zahl) {
+        ArrayList<Frage> essensFragen = new ArrayList<Frage>();
+        essensFragen.add(new Frage("Wie heißt dieser Samen?", "Leinsamen","Chiasamen", "Flohsamen", "Quinoa", ".//res//chiasamen.png", 'B'));
+        essensFragen.add(new Frage("Aus welchem Land stammt dieses Gericht - Shakshuka?", "Italien","Deutschland", "Türkei", "Israel", ".//res//shakshuka.png", 'D'));
+        essensFragen.add(new Frage("Wie heißt das cremefarbene Gemüse auf der Pizza?", "Lauch","Artischocken", "Blumenkohl", "Champignos", ".//res//pizza.png", 'B'));
+        essensFragen.add(new Frage("Welches Obst ist botanisch gesehen ein Gemüse?", "Rhabarber","Kiwi", "Erdberre", "Hagebutte", ".//res//gemüse.png", 'A'));
+        essensFragen.add(new Frage("Was verbirgt sich hinter dem Gericht Kalakukko?", "Japanische Fischsuppe","Sushi mit Thunfisch", "Fisch im Teigmantel", "Fisch in Kohlmantel", ".//res//japan.png", 'C'));
+        essensFragen.add(new Frage("Haggis gilt als umstrittene Delikatesse in welchem Land?", "Norwegen","Island", "Schottland", "Irland", ".//res//haggis.png", 'C'));
+        essensFragen.add(new Frage("Das Feijoada ist die Leibspeise vieler …?", "Tunesier","Ukrainer", "Roler", "Brasilianer", ".//res//brasilien.png", 'D'));
+        essensFragen.add(new Frage("Eine Pho bekommt man in welchen Land serviert?", "Vietnam","Indonesien", "Thailand", "Japan", ".//res//pho.png", 'A'));
+        essensFragen.add(new Frage("Welches Lebensmittel wird in Deutschland am vielfältiges hergestellt?", "Käse","Wurst", "Brot", "Marmelade", ".//res//brot.png", 'C'));
+        essensFragen.add(new Frage("Wie nennt sich dieser Salat?", "Mangold","Rucola", "Chicoree", "Endivien", ".//res//mangold.png", 'A'));
+
+        ArrayList<Frage> harryPotterFragen = new ArrayList<Frage>();
+        harryPotterFragen.add(new Frage("Zu welchem Genre gehört Harry Potter?", "Science Fiction","Fantasy", "Horror", "Krimi", ".//res//torte.png", 'B'));
+
+        ArrayList<Frage> geografieFragen = new ArrayList<Frage>();
+        geografieFragen.add(new Frage("Welcher Fluss ist der längste in Europa?", "Donau","Oka", "Wolgau", "Don", ".//res//fluss.jpeg", 'C'));
+
+        ArrayList<Frage> javaFragen = new ArrayList<Frage>();
+        javaFragen.add(new Frage("Was ist Java?", "Donau","Oka", "Wolgau", "Don", ".//res//fluss.png", 'C'));
+
+        switch (zahl) {
+            case 1:fragen = essensFragen;break;
+            case 2:fragen = harryPotterFragen;break;
+            case 3:fragen = geografieFragen;break;
+            case 4:fragen = javaFragen;break;
+            default:
+                break;
+        }
+
+    }
+
+    public void selectQuestionSet() {
+        Color textColor = new Color(122, 31, 182);
+        Color background = new Color(71, 27, 158);
+
         quizLogoPanel.setVisible(false);
         startButton.setVisible(false);
+
+        choicePanel = new JPanel();
+        // choiceLabel = new JLabel("Wähle eine Quiz Kategorie");
+        choice1Button = new JButton("Essens Quiz");
+        choice2Button = new JButton("Harry Potter Quiz");
+        choice3Button = new JButton("Geografie Quiz");
+        choice4Button = new JButton("Java Quiz");
+
+        try {
+            Font archivoQuestion = Font.createFont(Font.TRUETYPE_FONT, new File( ".//fonts//Archivo-VariableFont_wdth,wght.ttf")).deriveFont(35f);
+            GraphicsEnvironment graphicsEnvironment = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            graphicsEnvironment.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File(".//fonts//Archivo-VariableFont_wdth,wght.ttf")));
+            choice1Button.setFont(archivoQuestion);
+            choice2Button.setFont(archivoQuestion);
+            choice3Button.setFont(archivoQuestion);
+            choice4Button.setFont(archivoQuestion);
+        } catch (FontFormatException | IOException ex) {
+            ex.printStackTrace();
+        }
+
+        choicePanel.setBounds((MAINSCREEN_WIDTH / 2) - (800 / 2), MAINSCREEN_HEIGHT / 2 - (400/2), 800, 400);
+        choicePanel.setBackground(background);
+        choicePanel.setOpaque(false);
+
+        // choiceLabel.setBounds(20, 20, 400, 200);
+        // choicePanel.setBackground(background);
+        // choice1Button.setForeground(Color.WHITE);
+
+        choice1Button.setPreferredSize(new Dimension(350, 150));
+        choice1Button.setBackground(Color.WHITE);
+        choice1Button.setForeground(textColor);
+        choice1Button.setBorder(null);
+        choice1Button.setFocusPainted(false);
+        choicePanel.add(choice1Button);
+
+        choice2Button.setPreferredSize(new Dimension(350, 150));
+        choice2Button.setBackground(Color.WHITE);
+        choice2Button.setForeground(textColor);
+        choice2Button.setBorder(null);
+        choice2Button.setFocusPainted(false);
+        choicePanel.add(choice2Button);
+
+        choice3Button.setPreferredSize(new Dimension(350, 150));
+        choice3Button.setBackground(Color.WHITE);
+        choice3Button.setForeground(textColor);
+        choice3Button.setBorder(null);
+        choice3Button.setFocusPainted(false);
+        choicePanel.add(choice3Button);
+
+        choice4Button.setPreferredSize(new Dimension(350, 150));
+        choice4Button.setBackground(Color.WHITE);
+        choice4Button.setForeground(textColor);
+        choice4Button.setBorder(null);
+        choice4Button.setFocusPainted(false);
+        choicePanel.add(choice4Button);
+
+        choice1Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                fragenInialisieren(1);
+                gameCountDownOnClick();
+            }
+        });
+        choice2Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                fragenInialisieren(2);
+                gameCountDownOnClick();
+            }
+        });
+        choice3Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                fragenInialisieren(3);
+                gameCountDownOnClick();
+            }
+        });
+        choice4Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                fragenInialisieren(4);
+                gameCountDownOnClick();
+            }
+        });
+        mainScreenWindow.add(choicePanel);
+    }
+
+    //gameCountDown
+    public void gameCountDownOnClick() {
+        choicePanel.setVisible(false);
         //Custom Colors
         Color background = new Color(71, 27, 158);
 
@@ -784,7 +898,7 @@ public class MainScreen extends JFrame {
                 quizTimer.stop();
                 //reset question index
                 fragenIndex = 1;
-                gameCountDownOnClick(e);
+                selectQuestionSet();
             }
         });
         mainScreenWindow.add(playAgainButton);
