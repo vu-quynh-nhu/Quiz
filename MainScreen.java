@@ -60,7 +60,7 @@ public class MainScreen extends JFrame {
         //null to do a custom layout
         mainScreenWindow.setLayout(null);
         //Change Game Icon from Default Java to Custom
-        gameIcon = new ImageIcon(".//res//quizIcon.png");
+        gameIcon = new ImageIcon(".//res//quiz/quizIcon.png");
         mainScreenWindow.setIconImage(gameIcon.getImage());
 
         //Image Panel
@@ -71,7 +71,7 @@ public class MainScreen extends JFrame {
 
         //Label to put image inside Panel
         quizLogoLabel = new JLabel();
-        quizLogoIcon = new ImageIcon(".//res//quizLogo.png");
+        quizLogoIcon = new ImageIcon(".//res//quiz/quizLogo.png");
         quizLogoIcon.setImage(quizLogoIcon.getImage().getScaledInstance(QUIZLOGO_WIDTH - 10, QUIZLOGO_HEIGHT - 10, Image.SCALE_DEFAULT));
         quizLogoLabel.setIcon(quizLogoIcon);
         //add label to panel
@@ -136,33 +136,32 @@ public class MainScreen extends JFrame {
 
     public void fragenInialisieren(int zahl) {
         ArrayList<Frage> essensFragen = new ArrayList<Frage>();
-        essensFragen.add(new Frage("Wie heißt dieser Samen?", "Leinsamen","Chiasamen", "Flohsamen", "Quinoa", ".//res//chiasamen.png", 'B'));
-        essensFragen.add(new Frage("Aus welchem Land stammt dieses Gericht - Shakshuka?", "Italien","Deutschland", "Türkei", "Israel", ".//res//shakshuka.png", 'D'));
-        essensFragen.add(new Frage("Wie heißt das cremefarbene Gemüse auf der Pizza?", "Lauch","Artischocken", "Blumenkohl", "Champignos", ".//res//pizza.png", 'B'));
-        essensFragen.add(new Frage("Welches Obst ist botanisch gesehen ein Gemüse?", "Rhabarber","Kiwi", "Erdberre", "Hagebutte", ".//res//gemüse.png", 'A'));
-        essensFragen.add(new Frage("Was verbirgt sich hinter dem Gericht Kalakukko?", "Japanische Fischsuppe","Sushi mit Thunfisch", "Fisch im Teigmantel", "Fisch in Kohlmantel", ".//res//japan.png", 'C'));
-        essensFragen.add(new Frage("Haggis gilt als umstrittene Delikatesse in welchem Land?", "Norwegen","Island", "Schottland", "Irland", ".//res//haggis.png", 'C'));
-        essensFragen.add(new Frage("Das Feijoada ist die Leibspeise vieler …?", "Tunesier","Ukrainer", "Roler", "Brasilianer", ".//res//brasilien.png", 'D'));
-        essensFragen.add(new Frage("Eine Pho bekommt man in welchen Land serviert?", "Vietnam","Indonesien", "Thailand", "Japan", ".//res//pho.png", 'A'));
-        essensFragen.add(new Frage("Welches Lebensmittel wird in Deutschland am vielfältiges hergestellt?", "Käse","Wurst", "Brot", "Marmelade", ".//res//brot.png", 'C'));
-        essensFragen.add(new Frage("Wie nennt sich dieser Salat?", "Mangold","Rucola", "Chicoree", "Endivien", ".//res//mangold.png", 'A'));
+        essensFragen.add(new Frage("Wie heißt dieser Samen?", "Leinsamen","Chiasamen", "Flohsamen", "Quinoa", ".//res//foodQuestions/chiasamen.png", 'B'));
+        essensFragen.add(new Frage("Aus welchem Land stammt dieses Gericht - Shakshuka?", "Italien","Deutschland", "Türkei", "Israel", ".//res//foodQuestions/shakshuka.png", 'D'));
+        essensFragen.add(new Frage("Wie heißt das cremefarbene Gemüse auf der Pizza?", "Lauch","Artischocken", "Blumenkohl", "Champignos", ".//res//foodQuestions/pizza.png", 'B'));
+        essensFragen.add(new Frage("Welches Obst ist botanisch gesehen ein Gemüse?", "Rhabarber","Kiwi", "Erdberre", "Hagebutte", ".//res//foodQuestions/gemüse.png", 'A'));
+        essensFragen.add(new Frage("Was verbirgt sich hinter dem Gericht Kalakukko?", "Japanische Fischsuppe","Sushi mit Thunfisch", "Fisch im Teigmantel", "Fisch in Kohlmantel", ".//res//foodQuestions/japan.png", 'C'));
+        essensFragen.add(new Frage("Haggis gilt als umstrittene Delikatesse in welchem Land?", "Norwegen","Island", "Schottland", "Irland", ".//res//foodQuestions/haggis.png", 'C'));
+        essensFragen.add(new Frage("Das Feijoada ist die Leibspeise vieler …?", "Tunesier","Ukrainer", "Roler", "Brasilianer", ".//res//foodQuestions/brasilien.png", 'D'));
+        essensFragen.add(new Frage("Eine Pho bekommt man in welchen Land serviert?", "Vietnam","Indonesien", "Thailand", "Japan", ".//res//foodQuestions/pho.png", 'A'));
+        essensFragen.add(new Frage("Welches Lebensmittel wird in Deutschland am vielfältiges hergestellt?", "Käse","Wurst", "Brot", "Marmelade", ".//res//foodQuestions/brot.png", 'C'));
+        essensFragen.add(new Frage("Wie nennt sich dieser Salat?", "Mangold","Rucola", "Chicoree", "Endivien", ".//res//foodQuestions/mangold.png", 'A'));
 
         ArrayList<Frage> harryPotterFragen = new ArrayList<Frage>();
-        harryPotterFragen.add(new Frage("Zu welchem Genre gehört Harry Potter?", "Science Fiction","Fantasy", "Horror", "Krimi", ".//res//torte.png", 'B'));
+        harryPotterFragen.add(new Frage("Zu welchem Genre gehört Harry Potter?", "Science Fiction","Fantasy", "Horror", "Krimi", ".//res//harryQuestions/torte.jpg", 'B'));
 
         ArrayList<Frage> geografieFragen = new ArrayList<Frage>();
-        geografieFragen.add(new Frage("Welcher Fluss ist der längste in Europa?", "Donau","Oka", "Wolgau", "Don", ".//res//fluss.jpeg", 'C'));
+        geografieFragen.add(new Frage("Welcher Fluss ist der längste in Europa?", "Donau","Oka", "Wolgau", "Don", ".//res//geoQuestions/fluss.jpeg", 'C'));
 
         ArrayList<Frage> javaFragen = new ArrayList<Frage>();
-        javaFragen.add(new Frage("Was ist Java?", "Donau","Oka", "Wolgau", "Don", ".//res//fluss.png", 'C'));
+        javaFragen.add(new Frage("Was ist Java?", "Donau","Oka", "Wolgau", "Don", ".//res//javaQuestions/test.png", 'C'));
 
         switch (zahl) {
             case 1:fragen = essensFragen;break;
             case 2:fragen = harryPotterFragen;break;
             case 3:fragen = geografieFragen;break;
             case 4:fragen = javaFragen;break;
-            default:
-                break;
+            default:break;
         }
 
     }
@@ -297,7 +296,7 @@ public class MainScreen extends JFrame {
 
 
         //Background
-        backgroundImage = new ImageIcon(".//res//background.jpg");
+        backgroundImage = new ImageIcon(".//res//quiz/background.jpg");
         backgroundImage.setImage(backgroundImage.getImage().getScaledInstance(MAINSCREEN_WIDTH, MAINSCREEN_HEIGHT, Image.SCALE_DEFAULT));
         backgroundPanel = new JPanel();
         backgroundPanel.setBackground(background);
@@ -698,7 +697,7 @@ public class MainScreen extends JFrame {
         answerDButton.addActionListener(actionListener);
 
         //Background
-        backgroundImage = new ImageIcon(".//res//background.jpg");
+        backgroundImage = new ImageIcon(".//res//quiz/background.jpg");
         backgroundImage.setImage(backgroundImage.getImage().getScaledInstance(MAINSCREEN_WIDTH, MAINSCREEN_HEIGHT, Image.SCALE_DEFAULT));
         backgroundPanel = new JPanel();
         backgroundPanel.setBackground(background);
@@ -830,13 +829,13 @@ public class MainScreen extends JFrame {
 
         String path = "";
         if (scoreCount >= 0 && scoreCount < 4) {
-            path = ".//res//bronzemedal.png";
+            path = ".//res//quiz/bronzemedal.png";
             remarkLabel.setText("You tried"); 
         } else if (scoreCount > 3 && scoreCount < 7) {
-            path = ".//res.//silvermedal.png";
+            path = ".//res.//quiz/silvermedal.png";
             remarkLabel.setText("Gut Gemacht!"); 
         } else {
-            path = ".//res.//goldmedal.png";
+            path = ".//res.//quiz/goldmedal.png";
             remarkLabel.setText("Perfekt!"); 
         }
 
@@ -946,7 +945,7 @@ public class MainScreen extends JFrame {
         mainScreenWindow.add(exitGameButton);
 
         //Background
-        backgroundImage = new ImageIcon(".//res//background.jpg");
+        backgroundImage = new ImageIcon(".//res//quiz/background.jpg");
         backgroundImage.setImage(backgroundImage.getImage().getScaledInstance(MAINSCREEN_WIDTH, MAINSCREEN_HEIGHT, Image.SCALE_DEFAULT));
         backgroundPanel = new JPanel();
         backgroundPanel.setBackground(background);
