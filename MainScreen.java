@@ -3,6 +3,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class MainScreen extends JFrame {
     private JLabel headerLabel = new JLabel("Willkommen zu unserem Quiz!");
@@ -21,6 +22,9 @@ public class MainScreen extends JFrame {
     int startSecond, second, scoreCount;
     Timer quizTimer;
     GameSoundEffect gameSoundEffect = new GameSoundEffect();
+
+    int fragenIndex = 1;
+    ArrayList<Frage> fragen = new ArrayList<Frage>();
 
 
     //Constructor 
@@ -124,6 +128,17 @@ public class MainScreen extends JFrame {
                 gameCountDownOnClick(e);
             }
         });
+
+        fragen.add(new Frage("Wie heißt dieser Samen?", "Leinsamen","Chiasamen", "Flohsamen", "Quinoa", ".//res//chiasamen.png", 'B'));
+        fragen.add(new Frage("Aus welchem Land stammt dieses Gericht - Shakshuka?", "Italien","Deutschland", "Türkei", "Israel", ".//res//shakshuka.png", 'D'));
+        fragen.add(new Frage("Wie heißt das cremefarbene Gemüse auf der Pizza?", "Lauch","Artischocken", "Blumenkohl", "Champignos", ".//res//pizza.png", 'B'));
+        fragen.add(new Frage("Welches Obst ist botanisch gesehen ein Gemüse?", "Rhabarber","Kiwi", "Erdberre", "Hagebutte", ".//res//gemüse.png", 'A'));
+        fragen.add(new Frage("Was verbirgt sich hinter dem Gericht Kalakukko?", "Japanische Fischsuppe","Sushi mit Thunfisch", "Fisch im Teigmantel", "Fisch in Kohlmantel", ".//res//japan.png", 'C'));
+        fragen.add(new Frage("Haggis gilt als umstrittene Delikatesse in welchem Land?", "Norwegen","Island", "Schottland", "Irland", ".//res//haggis.png", 'C'));
+        fragen.add(new Frage("Das Feijoada ist die Leibspeise vieler …?", "Tunesier","Ukrainer", "Roler", "Brasilianer", ".//res//brasilien.png", 'D'));
+        fragen.add(new Frage("Eine Pho bekommt man in welchen Land serviert?", "Vietnam","Indonesien", "Thailand", "Japan", ".//res//pho.png", 'A'));
+        fragen.add(new Frage("Welches Lebensmittel wird in Deutschland am vielfältiges hergestellt?", "Käse","Wurst", "Brot", "Marmelade", ".//res//brot.png", 'C'));
+        fragen.add(new Frage("Wie nennt sich dieser Salat?", "Mangold","Rucola", "Chicoree", "Endivien", ".//res//mangold.png", 'A'));
     }
 
     public static void main(String[] args) {
@@ -214,24 +229,25 @@ public class MainScreen extends JFrame {
 
         inGameBarPanel = new JPanel();
         //increases when next/skipp Button was clicked
-        questionNumberLabel = new JLabel("Frage 1 / 15", SwingConstants.CENTER);
+        String questionNumString = "Frage " + fragenIndex + " / " + fragen.size();
+        questionNumberLabel = new JLabel(questionNumString, SwingConstants.CENTER);
         //increases when answer is right and next Button was clicked
         scoreLabel = new JLabel("Punkte: " + scoreCount, SwingConstants.CENTER);
         //restarts when next/skipp Button was clicked
         timerLabel = new JLabel("Zeit: 30", SwingConstants.CENTER);
 
         questionPanel = new JPanel();
-        questionLabel = new JLabel("Frage: Wie heißt diese Torte?", SwingConstants.CENTER);
+        questionLabel = new JLabel(fragen.get(fragenIndex-1).getFrage(), SwingConstants.CENTER);
 
         questionImagePanel = new JPanel();
         questionImageLabel = new JLabel();
-        questionImageIcon = new ImageIcon(".//res//torte.jpg");
+        questionImageIcon = new ImageIcon(fragen.get(fragenIndex-1).getImage());
 
         answerPanel = new JPanel();
-        answerAButton = new JButton("Schokotorte");
-        answerBButton = new JButton("Schwarzwälder Kirschtorte");
-        answerCButton = new JButton("Kirschtorte");
-        answerDButton = new JButton("Grunewald Kirschtorte");
+        answerAButton = new JButton(fragen.get(fragenIndex-1).getAntwortA());
+        answerBButton = new JButton(fragen.get(fragenIndex-1).getAntwortB());
+        answerCButton = new JButton(fragen.get(fragenIndex-1).getAntwortC());
+        answerDButton = new JButton(fragen.get(fragenIndex-1).getAntwortD());
 
         nextButton = new JButton("überspringen >");
         //custom font
@@ -270,13 +286,11 @@ public class MainScreen extends JFrame {
         quizCountdown();
         quizTimer.start();
 
-
-
         inGameBarPanel.add(questionNumberLabel);
         inGameBarPanel.add(scoreLabel);
         inGameBarPanel.add(timerLabel);
         
-        questionPanel.setBounds((MAINSCREEN_WIDTH / 2) - (600 / 2), 90, 600, 40);
+        questionPanel.setBounds((MAINSCREEN_WIDTH / 2) - (800 / 2), 90, 800, 40);
         questionPanel.setBackground(Color.BLACK);
         questionPanel.setOpaque(false);
         mainScreenWindow.getContentPane().add(questionPanel);
@@ -302,8 +316,6 @@ public class MainScreen extends JFrame {
         answerPanel.setOpaque(false);
         answerPanel.setBounds((MAINSCREEN_WIDTH / 2) - (800 / 2), 420, 800, 150);
         answerAButton.setPreferredSize(new Dimension(350, 68));
-        //Dimension aBtnSize = answerAButton.getPreferredSize();
-        //answerAButton.setBounds(70, 70, (int) aBtnSize.getWidth(), (int) aBtnSize.getHeight());
         answerAButton.setBackground(Color.WHITE);
         answerAButton.setForeground(answerText);
         answerAButton.setBorder(null);
@@ -311,8 +323,7 @@ public class MainScreen extends JFrame {
         answerPanel.add(answerAButton);
 
         answerBButton.setPreferredSize(new Dimension(350, 68));
-        //Dimension aBtnSize = answerAButton.getPreferredSize();
-        //answerAButton.setBounds(70, 70, (int) aBtnSize.getWidth(), (int) aBtnSize.getHeight());
+
         answerBButton.setBackground(Color.WHITE);
         answerBButton.setForeground(answerText);
         answerBButton.setBorder(null);
@@ -320,8 +331,6 @@ public class MainScreen extends JFrame {
         answerPanel.add(answerBButton);
 
         answerCButton.setPreferredSize(new Dimension(350, 68));
-        //Dimension aBtnSize = answerAButton.getPreferredSize();
-        //answerAButton.setBounds(70, 70, (int) aBtnSize.getWidth(), (int) aBtnSize.getHeight());
         answerCButton.setBackground(Color.WHITE);
         answerCButton.setForeground(answerText);
         answerCButton.setBorder(null);
@@ -329,22 +338,12 @@ public class MainScreen extends JFrame {
         answerPanel.add(answerCButton);
 
         answerDButton.setPreferredSize(new Dimension(350, 68));
-        //Dimension aBtnSize = answerAButton.getPreferredSize();
-        //answerAButton.setBounds(70, 70, (int) aBtnSize.getWidth(), (int) aBtnSize.getHeight());
         answerDButton.setBackground(Color.WHITE);
         answerDButton.setForeground(answerText);
         answerDButton.setBorder(null);
         answerDButton.setFocusPainted(false);
         answerPanel.add(answerDButton);
         
-        /*answerAButton.setUI(new ButtonUI() {
-            @Override
-            public void paint(Graphics g, JComponent c) {
-                super.paint(g, c);
-                paintComponents(g);
-            }
-        });*/
-
         answerAButton.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -460,7 +459,39 @@ public class MainScreen extends JFrame {
         nextButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                endScreenOnClick(e);
+                if (fragenIndex < fragen.size()) {
+                    fragenIndex++;
+                    //increases when next/skipp Button was clicked
+                    String questionNumString = "Frage " + fragenIndex + " / " + fragen.size();
+                    questionNumberLabel.setText(questionNumString);
+
+                    questionLabel.setText(fragen.get(fragenIndex-1).getFrage());
+
+                    answerAButton.setText(fragen.get(fragenIndex-1).getAntwortA());
+                    answerBButton.setText(fragen.get(fragenIndex-1).getAntwortB());
+                    answerCButton.setText(fragen.get(fragenIndex-1).getAntwortC());
+                    answerDButton.setText(fragen.get(fragenIndex-1).getAntwortD());
+
+                    String path = fragen.get(fragenIndex-1).getImage();
+                    questionImageIcon.setImage(new ImageIcon(path).getImage());
+                    questionImageLabel.repaint();
+
+                    answerAButton.setEnabled(true);
+                    answerBButton.setEnabled(true);    
+                    answerCButton.setEnabled(true);
+                    answerDButton.setEnabled(true);
+
+                    answerAButton.setBackground(Color.WHITE);
+                    answerBButton.setBackground(Color.WHITE);
+                    answerCButton.setBackground(Color.WHITE);
+                    answerDButton.setBackground(Color.WHITE);
+                    second = 30;
+                    timerLabel.setText("Zeit: " + second);
+                    quizTimer.start();
+                } else {
+                    endScreenOnClick(e);
+                }
+                
             }
         });
 
@@ -496,8 +527,22 @@ public class MainScreen extends JFrame {
                 JButton chosenAnswer = (JButton) e.getSource();
                 String correctAnswerSoundEffect = ".//sounds//correct.wav";
                 String wrongAnswerSoundEffect = ".//sounds//wrong.wav";
+                String correctAnswer = "";
 
-                if (chosenAnswer.getText().equals("Schwarzwälder Kirschtorte")) {
+                switch (fragen.get(fragenIndex-1).getRichtigeAntwort()) {
+                    case 'A': correctAnswer = fragen.get(fragenIndex-1).getAntwortA();
+                        break;
+                    case 'B': correctAnswer = fragen.get(fragenIndex-1).getAntwortB();
+                    break;
+                    case 'C': correctAnswer = fragen.get(fragenIndex-1).getAntwortC();
+                    break;
+                    case 'D': correctAnswer = fragen.get(fragenIndex-1).getAntwortD();
+                    break;
+                    default:
+                        break;
+                }              
+
+                if (chosenAnswer.getText().equals(correctAnswer)) {
                     quizTimer.stop();
                     scoreCount++;
                     gameSoundEffect.setFile(correctAnswerSoundEffect);
@@ -548,7 +593,18 @@ public class MainScreen extends JFrame {
 
                 if (second == 0) {
                     quizTimer.stop();
-                    answerBButton.setBackground(Color.GREEN);
+                    switch (fragen.get(fragenIndex-1).getRichtigeAntwort()) {
+                        case 'A':answerAButton.setBackground(Color.GREEN);
+                            break;
+                        case 'B':answerBButton.setBackground(Color.GREEN);
+                            break;
+                        case 'C':answerCButton.setBackground(Color.GREEN);
+                            break;
+                        case 'D':answerDButton.setBackground(Color.GREEN);
+                            break;
+                        default:
+                            break;
+                    }
                     nextButton.setText("nächste Frage >");
                     answerAButton.setEnabled(false);
                     answerBButton.setEnabled(false);    
@@ -579,7 +635,6 @@ public class MainScreen extends JFrame {
         pointsPanel = new JPanel();
         pointsLabel = new JLabel();
 
-        medalImage = new ImageIcon(".//res//silvermedal.png");
         medalPanel = new JPanel();
         medalLabel = new JLabel();
 
@@ -637,6 +692,18 @@ public class MainScreen extends JFrame {
         pointsLabel.setForeground(Color.WHITE);
         pointsPanel.add(pointsLabel);
         
+        String path = "";
+        if(scoreCount >= 0 && scoreCount < 4) {
+            remarkLabel.setText("You tired!"); 
+            path=".//res//bronzemedal.png";
+        } else if(scoreCount >= 4  && scoreCount < 8) {
+            remarkLabel.setText("Gut Gemacht!"); 
+            path=".//res//silvermedal.png";
+        } else {
+            remarkLabel.setText("Perfekt!"); 
+            path=".//res//goldmedal.png";
+        }
+        medalImage = new ImageIcon(path);
         //medal
         medalPanel.setBounds((MAINSCREEN_WIDTH / 2) - (160 / 2), 220, 160, 160);
         medalPanel.setOpaque(false);
@@ -652,7 +719,6 @@ public class MainScreen extends JFrame {
         mainScreenWindow.add(remarkPanel);
 
         //remarkLabel
-        remarkLabel.setText("Gut Gemacht!"); 
         remarkLabel.setForeground(Color.WHITE);
         remarkPanel.add(remarkLabel);
 
@@ -702,6 +768,8 @@ public class MainScreen extends JFrame {
                 exitGameButton.setVisible(false);
                 backgroundPanel.setVisible(false);
                 quizTimer.stop();
+                //reset question index
+                fragenIndex = 1;
                 gameCountDownOnClick(e);
             }
         });
