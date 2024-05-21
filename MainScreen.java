@@ -556,6 +556,18 @@ public class MainScreen extends JFrame {
                     gameSoundEffect.setFile(wrongAnswerSoundEffect);
                     gameSoundEffect.startSoundEffect();
                     chosenAnswer.setBackground(Color.RED);
+                    switch (fragen.get(fragenIndex-1).getRichtigeAntwort()) {
+                        case 'A':answerAButton.setBackground(Color.GREEN);
+                            break;
+                        case 'B':answerBButton.setBackground(Color.GREEN);
+                            break;
+                        case 'C':answerCButton.setBackground(Color.GREEN);
+                            break;
+                        case 'D':answerDButton.setBackground(Color.GREEN);
+                            break;
+                        default:
+                            break;
+                    }
                     nextButton.setText("nächste Frage >");
                 }
 
@@ -594,6 +606,18 @@ public class MainScreen extends JFrame {
 
                 if (second == 0) {
                     quizTimer.stop();
+                    switch (fragen.get(fragenIndex-1).getRichtigeAntwort()) {
+                        case 'A':answerAButton.setBackground(Color.GREEN);
+                            break;
+                        case 'B':answerBButton.setBackground(Color.GREEN);
+                            break;
+                        case 'C':answerCButton.setBackground(Color.GREEN);
+                            break;
+                        case 'D':answerDButton.setBackground(Color.GREEN);
+                            break;
+                        default:
+                            break;
+                    }
                     nextButton.setText("nächste Frage >");
                     answerAButton.setEnabled(false);
                     answerBButton.setEnabled(false);    
