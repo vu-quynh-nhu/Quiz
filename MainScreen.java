@@ -171,15 +171,15 @@ public class MainScreen extends JFrame {
 
         switch (zahl) {
             case 1:fragen = essensFragen;
-            break;
+                break;
             case 2:fragen = harryPotterFragen;
-            break;
+                break;
             case 3:fragen = geografieFragen;
-            break;
+                break;
             case 4:fragen = javaFragen;
-            break;
+                break;
             default:
-            break;
+                break;
         }
 
     }
