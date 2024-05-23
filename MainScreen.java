@@ -135,6 +135,7 @@ public class MainScreen extends JFrame {
     }
 
     public void fragenInialisieren(int zahl) {
+    //Essen Quiz
         ArrayList<Frage> essensFragen = new ArrayList<Frage>();
         essensFragen.add(new Frage("Wie heißt dieser Samen?", "Leinsamen","Chiasamen", "Flohsamen", "Quinoa", ".//res//foodQuestions/chiasamen.png", 'B'));
         essensFragen.add(new Frage("Aus welchem Land stammt dieses Gericht - Shakshuka?", "Italien","Deutschland", "Türkei", "Israel", ".//res//foodQuestions/shakshuka.png", 'D'));
@@ -147,21 +148,38 @@ public class MainScreen extends JFrame {
         essensFragen.add(new Frage("Welches Lebensmittel wird in Deutschland am vielfältiges hergestellt?", "Käse","Wurst", "Brot", "Marmelade", ".//res//foodQuestions/brot.png", 'C'));
         essensFragen.add(new Frage("Wie nennt sich dieser Salat?", "Mangold","Rucola", "Chicoree", "Endivien", ".//res//foodQuestions/mangold.png", 'A'));
 
+    //Harry Potter Quiz    
         ArrayList<Frage> harryPotterFragen = new ArrayList<Frage>();
-        harryPotterFragen.add(new Frage("Zu welchem Genre gehört Harry Potter?", "Science Fiction","Fantasy", "Horror", "Krimi", ".//res//harryQuestions/torte.jpg", 'B'));
-
+        harryPotterFragen.add(new Frage("Wie heißt der fast kopflose Geist von Hogwarts?", "Edmund Gruber","Fast Kopflose Nick", "Sir Patrick Delaney-Podmore", "Der Blutige Baron", ".//res//harryQuestions/hausgeist.png", 'B'));
+        harryPotterFragen.add(new Frage("Welcher Zug bringt die Schüler nach Hogwarts?", "Deutsche Bahn","Der Gleis 9 3/4-Express", "Dumbledore Express", "Der Hogwarts-Express", ".//res//harryQuestions/express.jpg", 'D'));
+        harryPotterFragen.add(new Frage("Was ist Dobbys Lieblingskleidungsstück?", "Ein Schal","Eine Socke", "Ein Hut", "Ein T-Shirt", ".//res//harryQuestions/dobby.jpg", 'B'));
+        harryPotterFragen.add(new Frage("Welcher Ort ist auf diesem Bild zu sehen?", "Hogsmeade","Hogwarts", "Das Haus der Weasleys", "Die Winkelgasse", ".//res//harryQuestions/hogwarts.jpg", 'B'));
+        harryPotterFragen.add(new Frage("Welcher Charakter ist auf dem Bild zu sehen?", "Argus Filch","Cornelius Fudge", "Rufus Scrimgeour", "Mundungus Fletcher", ".//res//harryQuestions/filch.jpg", 'A'));
+        harryPotterFragen.add(new Frage("Wie heißt die Mutter von Draco Malfoy?", "Molly","Bellatrix", "Narcissa", "Andromeda", ".//res//harryQuestions/narcissa.jpg", 'C'));
+        harryPotterFragen.add(new Frage("Welcher Charakter ist auf dem Bild zu sehen?", "Albus Dumbledore","Rubeus Hagrid", "Severus Snape", "Lord Voldemort", ".//res//harryQuestions/voldemort.jpg", 'D'));
+        harryPotterFragen.add(new Frage("Wer ist der beste Freund von Harry Potter?", "Ron Weasley","Cedric Diggory", "Draco Malfoy", "Hermione", ".//res//harryQuestions/weasley.jpg", 'A'));
+        harryPotterFragen.add(new Frage("Welche Position spielt Harry Potter im Quidditch-Team von Gryffindor?", "Treiber","Jäger", "Hüter", "Sucher", ".//res//harryQuestions/quidditch.jpg", 'D'));
+        harryPotterFragen.add(new Frage("Was ist der Patronus von Harry Potter?", "Ein Hirsch","Ein Drache", "Ein Phönix", "Ein Wolf", ".//res//harryQuestions/patronus.jpg", 'A'));
+     
+    //Geografie Quiz    
         ArrayList<Frage> geografieFragen = new ArrayList<Frage>();
         geografieFragen.add(new Frage("Welcher Fluss ist der längste in Europa?", "Donau","Oka", "Wolgau", "Don", ".//res//geoQuestions/fluss.jpeg", 'C'));
 
+    //Java Quiz
         ArrayList<Frage> javaFragen = new ArrayList<Frage>();
         javaFragen.add(new Frage("Was ist Java?", "Donau","Oka", "Wolgau", "Don", ".//res//javaQuestions/test.png", 'C'));
 
         switch (zahl) {
-            case 1:fragen = essensFragen;break;
-            case 2:fragen = harryPotterFragen;break;
-            case 3:fragen = geografieFragen;break;
-            case 4:fragen = javaFragen;break;
-            default:break;
+            case 1:fragen = essensFragen;
+            break;
+            case 2:fragen = harryPotterFragen;
+            break;
+            case 3:fragen = geografieFragen;
+            break;
+            case 4:fragen = javaFragen;
+            break;
+            default:
+            break;
         }
 
     }
