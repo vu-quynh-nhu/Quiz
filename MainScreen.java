@@ -9,7 +9,7 @@ public class MainScreen extends JFrame {
     private JButton startButton = new JButton("START");
     private JFrame mainScreenWindow;
     private JPanel backgroundPanel, choicePanel, gameCountdownPanel, quizLogoPanel, inGameBarPanel, questionPanel, answerPanel, questionImagePanel, gameOverPanel, pointsPanel, remarkPanel, medalPanel;
-    private JLabel backgroundLabel, choiceLabel, gameCountdownLabel, quizLogoLabel, questionLabel, questionNumberLabel, scoreLabel, timerLabel, questionImageLabel, gameOverLabel, pointsLabel, remarkLabel, medalLabel;
+    private JLabel backgroundLabel, choiceLabel, choice1label, choice2label, choice3label, choice4label, gameCountdownLabel, quizLogoLabel, questionLabel, questionNumberLabel, scoreLabel, timerLabel, questionImageLabel, gameOverLabel, pointsLabel, remarkLabel, medalLabel;
     private ImageIcon backgroundImage, quizLogoIcon, gameIcon, questionImageIcon, medalImage;
     private String startTimerSound;
     private final int MAINSCREEN_WIDTH = 1000;
@@ -158,7 +158,7 @@ public class MainScreen extends JFrame {
         harryPotterFragen.add(new Frage("Wer ist der beste Freund von Harry Potter?", "Ron Weasley","Cedric Diggory", "Draco Malfoy", "Hermione", ".//res//harryQuestions/weasley.jpg", 'A'));
         harryPotterFragen.add(new Frage("Welche Position spielt Harry Potter im Quidditch-Team von Gryffindor?", "Treiber","Jäger", "Hüter", "Sucher", ".//res//harryQuestions/quidditch.jpg", 'D'));
         harryPotterFragen.add(new Frage("Was ist der Patronus von Harry Potter?", "Ein Hirsch","Ein Drache", "Ein Phönix", "Ein Wolf", ".//res//harryQuestions/patronus.jpg", 'A'));
-     
+
     //Geografie Quiz    
         ArrayList<Frage> geografieFragen = new ArrayList<Frage>();
         geografieFragen.add(new Frage("Welcher Fluss ist der längste in Europa?", "Donau","Oka", "Wolgau", "Don", ".//res//geoQuestions/fluss.jpeg", 'C'));
@@ -189,19 +189,39 @@ public class MainScreen extends JFrame {
         quizLogoPanel.setVisible(false);
         startButton.setVisible(false);
 
+        choice1label = new JLabel();
+        choice2label = new JLabel();
+        choice3label = new JLabel();
+        choice4label = new JLabel();
+
         choicePanel = new JPanel();
         // choiceLabel = new JLabel("Wähle eine Quiz Kategorie");
-        choice1Button = new JButton("Essens Quiz");
-        choice2Button = new JButton("Harry Potter Quiz");
-        choice3Button = new JButton("Geografie Quiz");
-        choice4Button = new JButton("Java Quiz");
+        ImageIcon food = new ImageIcon(".//res//foodQuestions/food-choice.jpg");
+        food.setImage(food.getImage().getScaledInstance(350, 210, Image.SCALE_DEFAULT));
+        choice1Button = new JButton(food);
+
+        ImageIcon harryPotter = new ImageIcon(".//res//harryQuestions/harry-choice.jpg");
+        harryPotter.setImage(harryPotter.getImage().getScaledInstance(350, 200, Image.SCALE_DEFAULT));
+        choice2Button = new JButton(harryPotter);
+
+        ImageIcon geography = new ImageIcon(".//res//geoQuestions/geography-choice.jpg");
+        //geography.setImage(geography.getImage().getScaledInstance(350, 200, Image.SCALE_DEFAULT));
+        choice3Button = new JButton(geography);
+
+        ImageIcon java = new ImageIcon(".//res//javaQuestions/java-choice.png");
+        java.setImage(java.getImage().getScaledInstance(350, 220, Image.SCALE_DEFAULT));
+        choice4Button = new JButton(java);
 
         try {
-            Font archivoQuestion = Font.createFont(Font.TRUETYPE_FONT, new File( ".//fonts//Archivo-VariableFont_wdth,wght.ttf")).deriveFont(35f);
+            Font archivoQuestion = Font.createFont(Font.TRUETYPE_FONT, new File( ".//fonts//Archivo-VariableFont_wdth,wght.ttf")).deriveFont(27f);
             GraphicsEnvironment graphicsEnvironment = GraphicsEnvironment.getLocalGraphicsEnvironment();
             graphicsEnvironment.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File(".//fonts//Archivo-VariableFont_wdth,wght.ttf")));
             choice1Button.setFont(archivoQuestion);
             choice2Button.setFont(archivoQuestion);
+            choice1label.setFont(archivoQuestion);
+            choice2label.setFont(archivoQuestion);
+            choice3label.setFont(archivoQuestion);
+            choice4label.setFont(archivoQuestion);
             choice3Button.setFont(archivoQuestion);
             choice4Button.setFont(archivoQuestion);
         } catch (FontFormatException | IOException ex) {
@@ -217,38 +237,55 @@ public class MainScreen extends JFrame {
         // choice1Button.setForeground(Color.WHITE);
 
         choice1Button.setPreferredSize(new Dimension(350, 150));
-        choice1Button.setBackground(Color.WHITE);
-        choice1Button.setForeground(textColor);
         choice1Button.setBorder(null);
         choice1Button.setFocusPainted(false);
         choicePanel.add(choice1Button);
 
+        choice1label.setText("Essens Quiz");
+        choice1label.setForeground(Color.WHITE);
+        choice1label.setAlignmentX(0.5f);
+        //choice1label.setAlignmentY(0.9f);
+        choice1Button.add(choice1label);
+
         choice2Button.setPreferredSize(new Dimension(350, 150));
-        choice2Button.setBackground(Color.WHITE);
-        choice2Button.setForeground(textColor);
         choice2Button.setBorder(null);
         choice2Button.setFocusPainted(false);
         choicePanel.add(choice2Button);
 
+        choice2label.setText("Harry Potter Quiz");
+        choice2label.setForeground(Color.WHITE);
+        choice2label.setAlignmentX(0.5f);
+        choice2label.setAlignmentY(0.9f);
+        choice2Button.add(choice2label);
+
         choice3Button.setPreferredSize(new Dimension(350, 150));
-        choice3Button.setBackground(Color.WHITE);
-        choice3Button.setForeground(textColor);
         choice3Button.setBorder(null);
         choice3Button.setFocusPainted(false);
         choicePanel.add(choice3Button);
 
+        choice3label.setText("Geografie Quiz");
+        choice3label.setForeground(Color.BLACK);
+        choice3label.setAlignmentX(0.5f);
+        choice3Button.add(choice3label);
+
         choice4Button.setPreferredSize(new Dimension(350, 150));
         choice4Button.setBackground(Color.WHITE);
-        choice4Button.setForeground(textColor);
         choice4Button.setBorder(null);
         choice4Button.setFocusPainted(false);
         choicePanel.add(choice4Button);
+
+        choice4label.setText("Java Quiz");
+        choice4label.setForeground(Color.WHITE);
+        choice4label.setAlignmentX(0.7f);
+        choice4label.setAlignmentY(0.58f);
+        choice4Button.add(choice4label);
 
         choice1Button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 fragenInialisieren(1);
                 gameCountDownOnClick();
+
             }
         });
         addHoverEffect(choice1Button);
@@ -258,6 +295,7 @@ public class MainScreen extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 fragenInialisieren(2);
                 gameCountDownOnClick();
+                
             }
         });
         addHoverEffect(choice2Button);
@@ -279,6 +317,19 @@ public class MainScreen extends JFrame {
         addHoverEffect(choice4Button);
 
         mainScreenWindow.add(choicePanel);
+
+        //Background
+        backgroundImage = new ImageIcon(".//res//quiz/background.jpg");
+        backgroundImage.setImage(backgroundImage.getImage().getScaledInstance(MAINSCREEN_WIDTH, MAINSCREEN_HEIGHT, Image.SCALE_DEFAULT));
+        backgroundPanel = new JPanel();
+        backgroundPanel.setBackground(background);
+        backgroundPanel.setBounds(0, 0, MAINSCREEN_WIDTH, MAINSCREEN_HEIGHT);
+        backgroundLabel = new JLabel();
+        backgroundLabel.setBackground(background);
+        backgroundLabel.setIcon(backgroundImage);
+        backgroundLabel.setBounds(0, 0, MAINSCREEN_WIDTH, MAINSCREEN_HEIGHT);
+        backgroundPanel.add(backgroundLabel);
+        mainScreenWindow.add(backgroundPanel); 
     }
 
 //Hover effect    
@@ -299,6 +350,7 @@ private void addHoverEffect(JButton button) {
     //gameCountDown
     public void gameCountDownOnClick() {
         choicePanel.setVisible(false);
+        backgroundPanel.setVisible(false);
         //Custom Colors
         Color background = new Color(71, 27, 158);
 
@@ -599,8 +651,6 @@ private void addHoverEffect(JButton button) {
         });
 
         //next button
-
-       
         nextButton.setBounds(760, 585, 200, 50);
         nextButton.setBorder(null);
         nextButton.setFocusPainted(false);
