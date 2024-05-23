@@ -606,6 +606,10 @@ private void addHoverEffect(JButton button) {
         nextButton.setContentAreaFilled(false);
         mainScreenWindow.add(nextButton);
 
+        if (fragenIndex == 10) {
+            nextButton.setText("Quiz-Ende");
+        }
+
         nextButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -641,7 +645,7 @@ private void addHoverEffect(JButton button) {
                 } else {
                     endScreenOnClick(e);
                 }
-                
+                nextButton.setText("überspringen >");
             }
         });
 
@@ -768,6 +772,7 @@ private void addHoverEffect(JButton button) {
                         default:
                             break;
                     }
+
                     nextButton.setText("nächste Frage >");
                     answerAButton.setEnabled(false);
                     answerBButton.setEnabled(false);    
