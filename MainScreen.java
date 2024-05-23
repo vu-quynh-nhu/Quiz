@@ -4,7 +4,6 @@ import java.awt.event.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-
 public class MainScreen extends JFrame {
     private JLabel headerLabel = new JLabel("Willkommen zu unserem Quiz!");
     private JButton startButton = new JButton("START");
@@ -25,7 +24,6 @@ public class MainScreen extends JFrame {
 
     int fragenIndex = 1;
     ArrayList<Frage> fragen = new ArrayList<Frage>();
-
 
     //Constructor 
     public MainScreen() {
@@ -253,6 +251,8 @@ public class MainScreen extends JFrame {
                 gameCountDownOnClick();
             }
         });
+        addHoverEffect(choice1Button);
+        
         choice2Button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -260,6 +260,7 @@ public class MainScreen extends JFrame {
                 gameCountDownOnClick();
             }
         });
+        addHoverEffect(choice2Button);
         choice3Button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -267,6 +268,7 @@ public class MainScreen extends JFrame {
                 gameCountDownOnClick();
             }
         });
+        addHoverEffect(choice3Button);
         choice4Button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -274,8 +276,25 @@ public class MainScreen extends JFrame {
                 gameCountDownOnClick();
             }
         });
+        addHoverEffect(choice4Button);
+
         mainScreenWindow.add(choicePanel);
     }
+
+//Hover effect    
+private void addHoverEffect(JButton button) {
+    button.addMouseListener(new MouseAdapter() {
+        @Override
+        public void mouseEntered(MouseEvent e) {
+            button.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e) {
+            button.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+        }
+    });
+}
 
     //gameCountDown
     public void gameCountDownOnClick() {
