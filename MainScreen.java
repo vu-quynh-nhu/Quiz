@@ -244,7 +244,6 @@ public class MainScreen extends JFrame {
         choice1label.setText("Essens Quiz");
         choice1label.setForeground(Color.WHITE);
         choice1label.setAlignmentX(0.5f);
-        //choice1label.setAlignmentY(0.9f);
         choice1Button.add(choice1label);
 
         choice2Button.setPreferredSize(new Dimension(350, 150));
