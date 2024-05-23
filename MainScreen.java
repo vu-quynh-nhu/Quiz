@@ -599,6 +599,8 @@ private void addHoverEffect(JButton button) {
         });
 
         //next button
+
+       
         nextButton.setBounds(760, 585, 200, 50);
         nextButton.setBorder(null);
         nextButton.setFocusPainted(false);
@@ -606,9 +608,6 @@ private void addHoverEffect(JButton button) {
         nextButton.setContentAreaFilled(false);
         mainScreenWindow.add(nextButton);
 
-        if (fragenIndex == 10) {
-            nextButton.setText("Quiz-Ende");
-        }
 
         nextButton.addActionListener(new ActionListener() {
             @Override
@@ -645,7 +644,11 @@ private void addHoverEffect(JButton button) {
                 } else {
                     endScreenOnClick(e);
                 }
-                nextButton.setText("überspringen >");
+                if (fragenIndex == 10) {
+                    nextButton.setText("Quiz-Ende >");
+                } else {
+                    nextButton.setText("überspringen >");
+                }
             }
         });
 
@@ -703,7 +706,12 @@ private void addHoverEffect(JButton button) {
                     gameSoundEffect.setFile(correctAnswerSoundEffect);
                     gameSoundEffect.startSoundEffect();
                     chosenAnswer.setBackground(Color.GREEN);
-                    nextButton.setText("nächste Frage >");
+                    
+                    if (fragenIndex == 10) {
+                        nextButton.setText("Quiz-Ende >");
+                    } else {
+                        nextButton.setText("nächste Frage >");
+                    }
                     
                 } else {
                     quizTimer.stop();
@@ -722,7 +730,12 @@ private void addHoverEffect(JButton button) {
                         default:
                             break;
                     }
-                    nextButton.setText("nächste Frage >");
+
+                    if (fragenIndex == 10) {
+                        nextButton.setText("Quiz-Ende >");
+                    } else {
+                        nextButton.setText("nächste Frage >");
+                    }
                 }
 
                 answerAButton.setEnabled(false);
