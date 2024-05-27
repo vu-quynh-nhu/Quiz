@@ -162,6 +162,15 @@ public class MainScreen extends JFrame {
     //Geografie Quiz    
         ArrayList<Frage> geografieFragen = new ArrayList<Frage>();
         geografieFragen.add(new Frage("Welcher Fluss ist der längste in Europa?", "Donau","Oka", "Wolgau", "Don", ".//res//geoQuestions/fluss.jpeg", 'C'));
+        geografieFragen.add(new Frage("Wie hoch ist der Mount Everest?", "8.849 m","8.545 m", "9.243 m", "8.763 m", ".//res//geoQuestions/mountEverst.jpeg", 'A'));
+        geografieFragen.add(new Frage("Wie viele Ozeane gibt es auf der Welt?", "3","4", "5", "6", ".//res//geoQuestions/ozean.jpeg", 'C'));
+        geografieFragen.add(new Frage("Welches Land hat die meisten Inseln?", "Indonesien","Schweden", "USA", "Philippinen", ".//res//geoQuestions/insel.jpeg", 'B'));
+        geografieFragen.add(new Frage("Welches Land hat die meisten aktiven Vulkane?", "Indonesien","Island", "Japan", "USA", ".//res//geoQuestions/vulkan.jpeg", 'C'));
+        geografieFragen.add(new Frage("In welchem Land befindet sich das Great Barrier Reef?", "Neuseeland","USA", "Indien", "Australien", ".//res//geoQuestions/riff.jpeg", 'D'));
+        geografieFragen.add(new Frage("In welchem Land befindet sich die größte Salzwüste der Welt, Salar de Uyuni?", "Peru","Bolivien", "Argentinien", "Chile", ".//res//geoQuestions/salzwüste.jpeg", 'C'));
+        geografieFragen.add(new Frage("In welchem Land befindet sich der Mount Kilimanjaro?", "Kenia","Tansania", "Uganda", " Äthiopien", ".//res//geoQuestions/kilimanjaro.jpeg", 'B'));
+        geografieFragen.add(new Frage("Welches Land hat die größte Bevölkerung auf der Welt?", "China","Indien", "USA", "Russland", ".//res//geoQuestions/bewohner.jpeg", 'A'));
+        geografieFragen.add(new Frage("Welches Land hat die meisten Zeitzone auf der Welt?", "Großbritannien","Russland", "USA", "Frankreich", ".//res//geoQuestions/zeitzonen.jpeg", 'D'));
 
     //Java Quiz
         ArrayList<Frage> javaFragen = new ArrayList<Frage>();
