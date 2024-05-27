@@ -8,7 +8,7 @@ public class MainScreen extends JFrame {
     private JLabel headerLabel = new JLabel("Willkommen zu unserem Quiz!");
     private JButton startButton = new JButton("START");
     private JFrame mainScreenWindow;
-    private JPanel backgroundPanel, choicePanel, gameCountdownPanel, quizLogoPanel, inGameBarPanel, questionPanel, answerPanel, questionImagePanel, gameOverPanel, pointsPanel, remarkPanel, medalPanel;
+    private JPanel backgroundPanel, choicePanel, choiceLabelPanel, gameCountdownPanel, quizLogoPanel, inGameBarPanel, questionPanel, answerPanel, questionImagePanel, gameOverPanel, pointsPanel, remarkPanel, medalPanel;
     private JLabel backgroundLabel, choiceLabel, choice1label, choice2label, choice3label, choice4label, gameCountdownLabel, quizLogoLabel, questionLabel, questionNumberLabel, scoreLabel, timerLabel, questionImageLabel, gameOverLabel, pointsLabel, remarkLabel, medalLabel;
     private ImageIcon backgroundImage, quizLogoIcon, gameIcon, questionImageIcon, medalImage;
     private String startTimerSound;
@@ -204,7 +204,9 @@ public class MainScreen extends JFrame {
         choice4label = new JLabel();
 
         choicePanel = new JPanel();
-        // choiceLabel = new JLabel("Wähle eine Quiz Kategorie");
+        choiceLabelPanel = new JPanel();
+        choiceLabel = new JLabel("Wähle eine Quiz Kategorie:");
+
         ImageIcon food = new ImageIcon(".//res//foodQuestions/food-choice.jpg");
         food.setImage(food.getImage().getScaledInstance(350, 210, Image.SCALE_DEFAULT));
         choice1Button = new JButton(food);
@@ -225,6 +227,8 @@ public class MainScreen extends JFrame {
             Font archivoQuestion = Font.createFont(Font.TRUETYPE_FONT, new File( ".//fonts//Archivo-VariableFont_wdth,wght.ttf")).deriveFont(27f);
             GraphicsEnvironment graphicsEnvironment = GraphicsEnvironment.getLocalGraphicsEnvironment();
             graphicsEnvironment.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File(".//fonts//Archivo-VariableFont_wdth,wght.ttf")));
+            choiceLabel.setFont(archivoQuestion);
+            choiceLabel.setFont(new Font(choiceLabel.getFont().getName(), choiceLabel.getFont().getStyle(), 33));
             choice1Button.setFont(archivoQuestion);
             choice2Button.setFont(archivoQuestion);
             choice1label.setFont(archivoQuestion);
@@ -237,13 +241,15 @@ public class MainScreen extends JFrame {
             ex.printStackTrace();
         }
 
-        choicePanel.setBounds((MAINSCREEN_WIDTH / 2) - (800 / 2), MAINSCREEN_HEIGHT / 2 - (400/2), 800, 400);
-        choicePanel.setBackground(background);
-        choicePanel.setOpaque(false);
+        choiceLabelPanel.setBounds((MAINSCREEN_WIDTH / 2) - (600 / 2), 80, 600, 50);
+        choiceLabelPanel.setOpaque(false);
+        mainScreenWindow.add(choiceLabelPanel);
 
-        // choiceLabel.setBounds(20, 20, 400, 200);
-        // choicePanel.setBackground(background);
-        // choice1Button.setForeground(Color.WHITE);
+        choiceLabel.setForeground(Color.WHITE);
+        choiceLabelPanel.add(choiceLabel);
+        
+        choicePanel.setBounds((MAINSCREEN_WIDTH / 2) - (800 / 2), MAINSCREEN_HEIGHT / 2 - (315/2), 800, 315);
+        choicePanel.setOpaque(false);
 
         choice1Button.setPreferredSize(new Dimension(350, 150));
         choice1Button.setBorder(null);
@@ -357,6 +363,7 @@ private void addHoverEffect(JButton button) {
 
     //gameCountDown
     public void gameCountDownOnClick() {
+        choiceLabelPanel.setVisible(false);
         choicePanel.setVisible(false);
         backgroundPanel.setVisible(false);
         //Custom Colors
