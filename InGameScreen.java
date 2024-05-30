@@ -18,6 +18,10 @@ public class InGameScreen {
     static Timer quizTimer;
     static GameSoundEffect gameSoundEffect = new GameSoundEffect();
 
+    public static void setFragenIndex(int fragenIndex) {
+        InGameScreen.fragenIndex = fragenIndex;
+    }
+
     public static void showInGameScreen(JFrame mainScreenWindow, JPanel gameCountdownPanel, ArrayList<Frage> fragen) {
         //custom Colors
         Color quizImageBorder = new Color(161, 36, 203);

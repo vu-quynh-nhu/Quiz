@@ -167,6 +167,7 @@ public class EndScreen {
                 //reset question index
                 //fragenIndex = 1;
                 //selectQuestionSet();
+                InGameScreen.setFragenIndex(1);
                 CategoryScreen.showCategoryScreen(mainScreenWindow, answerPanel, nextButton);
             }
         });
