@@ -189,10 +189,10 @@ public class MainScreen extends JFrame {
                 break;
         }
 
-    }
+    } 
 
     public void selectQuestionSet() {
-        Color textColor = new Color(122, 31, 182);
+        Color cultureText = new Color(70, 159, 194);
         Color background = new Color(71, 27, 158);
 
         quizLogoPanel.setVisible(false);
@@ -219,9 +219,9 @@ public class MainScreen extends JFrame {
         //geography.setImage(geography.getImage().getScaledInstance(350, 200, Image.SCALE_DEFAULT));
         choice3Button = new JButton(geography);
 
-        ImageIcon java = new ImageIcon(".//res//javaQuestions/java-choice.png");
-        java.setImage(java.getImage().getScaledInstance(350, 220, Image.SCALE_DEFAULT));
-        choice4Button = new JButton(java);
+        ImageIcon culture = new ImageIcon(".//res//cultureQuestions/culture-choice.jpg");
+        culture.setImage(culture.getImage().getScaledInstance(350, 200, Image.SCALE_DEFAULT));
+        choice4Button = new JButton(culture);
 
         try {
             Font archivoQuestion = Font.createFont(Font.TRUETYPE_FONT, new File( ".//fonts//Archivo-VariableFont_wdth,wght.ttf")).deriveFont(27f);
@@ -283,15 +283,13 @@ public class MainScreen extends JFrame {
         choice3Button.add(choice3label);
 
         choice4Button.setPreferredSize(new Dimension(350, 150));
-        choice4Button.setBackground(Color.WHITE);
         choice4Button.setBorder(null);
         choice4Button.setFocusPainted(false);
         choicePanel.add(choice4Button);
 
-        choice4label.setText("Java Quiz");
-        choice4label.setForeground(Color.WHITE);
-        choice4label.setAlignmentX(0.7f);
-        choice4label.setAlignmentY(0.58f);
+        choice4label.setText("Kultur Quiz");
+        choice4label.setForeground(cultureText);
+        choice4label.setAlignmentX(0.07f);
         choice4Button.add(choice4label);
 
         choice1Button.addActionListener(new ActionListener() {
