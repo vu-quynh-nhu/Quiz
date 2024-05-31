@@ -386,11 +386,6 @@ public class InGameScreen {
                             break;
                     }
 
-                    if (fragenIndex == 10) {
-                        nextButton.setText("Quiz-Ende >");
-                    } else {
-                        nextButton.setText("nächste Frage >");
-                    }
                 }
 
                 answerAButton.setEnabled(false);
@@ -440,8 +435,14 @@ public class InGameScreen {
                         default:
                             break;
                     }
+                    
+                    if (fragenIndex == 10) {
+                        nextButton.setText("Quiz-Ende >");
+                    } else {
+                        nextButton.setText("nächste Frage >");
+                    }
 
-                    nextButton.setText("nächste Frage >");
+                   
                     answerAButton.setEnabled(false);
                     answerBButton.setEnabled(false);    
                     answerCButton.setEnabled(false);
