@@ -73,7 +73,7 @@ public class CountdownScreen{
 
     //Methode zum Starten des Timers
     public static void startTimer(JFrame mainScreenWindow, ArrayList<Frage> fragen) {
-        //Hinzufügen eines ActionListerns die Aktion nach Ablauf einer Sekunde auslöst
+        //Hinzufügen eines ActionListerns, die die Aktion nach Ablauf einer Sekunde auslöst
         startTimer = new Timer(1000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

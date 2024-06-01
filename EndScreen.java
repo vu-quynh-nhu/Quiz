@@ -22,8 +22,7 @@ public class EndScreen {
         answerPanel.setVisible(false);
         nextButtonPanel.setVisible(false);
 
-
-        //Initialize der Buttons, Labels, Panels, etc
+        //Initialize der Buttons, Labels, Panels, etc.
         gameOverPanel = new JPanel();
         gameOverLabel = new JLabel();
 
@@ -170,7 +169,7 @@ public class EndScreen {
         //Der nochmal Spielen Button wird zum Fenster hinzugefügt
         mainScreenWindow.add(playAgainButton);
 
-        //Die Attribute (Textfarbe,Position, Höhe, etc.) des Spiel Verlassen Button wird angepasst
+        //Die Attribute (Textfarbe, Position, Höhe, etc.) des Spiel Verlassen Button wird angepasst
         exitGameButton.setText("Spiel beenden");
         exitGameButton.setForeground(Color.WHITE);
         exitGameButton.setBorder(null);
@@ -178,8 +177,8 @@ public class EndScreen {
         exitGameButton.setContentAreaFilled(false);
         exitGameButton.setBounds(700, 550, 200, 30);
 
-        //Event-Handling für den nochmal Spielen Verlassen
-        //wenn die Maus den Button vom Spiel Verlassen betritt, so ändert sich der Cursor
+        //Event-Handling für den nochmal Spiel Verlassen Button
+        //wenn die Maus den Spiel Verlassen Button betritt, so ändert sich der Cursor
         exitGameButton.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -215,10 +214,10 @@ public class EndScreen {
                 mainScreenWindow.dispatchEvent(new WindowEvent(mainScreenWindow, WindowEvent.WINDOW_CLOSING));
             }
         });
-        //Der Spiel Verlassen Buttons wird dem Fenster hinzugefügt
+        //Der Spiel Verlassen Button wird dem Fenster hinzugefügt
         mainScreenWindow.add(exitGameButton);
 
-        //Hinterground des Screens anpassen
+        //Hintergrund des Screens anpassen
         endBackgroundImage = new ImageIcon(".//res//quiz/background.jpg");
         endBackgroundImage.setImage(endBackgroundImage.getImage().getScaledInstance(QuizUtils.MAINSCREEN_WIDTH , QuizUtils.MAINSCREEN_HEIGHT , Image.SCALE_DEFAULT));
         endBackgroundPanel = new JPanel();

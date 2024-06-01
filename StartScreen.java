@@ -18,10 +18,6 @@ public class StartScreen {
     static final int QUIZLOGO_WIDTH = 681;
     static final int QUIZLOGO_HEIGHT = 419;
 
-    public StartScreen() {
-
-    }
-
     //Methode zum anzeigen des Start Screens
     public static void showStartScreen() {
         //benutzerdefinierte Farben
@@ -54,7 +50,7 @@ public class StartScreen {
         mainScreenWindow.setLocationRelativeTo(null);
         //null, damit ein benutzerdefninertes Layout zu erstellen
         mainScreenWindow.setLayout(null);
-        //Das Icon der Anwendung ändern
+        //Das Icon der Anwendung wird geändert
         gameIcon = new ImageIcon(".//res//quiz/quizIcon.png");
         mainScreenWindow.setIconImage(gameIcon.getImage());
 
@@ -71,9 +67,8 @@ public class StartScreen {
         //Die Größe wird definiert
         quizLogoIcon.setImage(quizLogoIcon.getImage().getScaledInstance(QUIZLOGO_WIDTH - 10, QUIZLOGO_HEIGHT - 10, Image.SCALE_DEFAULT));
         quizLogoLabel.setIcon(quizLogoIcon);
-        //Das Bild an das Panel hinzugefügt
+        //Das Bild wird an das Panel hinzugefügt
         quizLogoPanel.add(quizLogoLabel);
-
         //Das Panel wird an das Fenster hinzugefügt
         mainScreenWindow.setVisible(true);
 
@@ -98,7 +93,7 @@ public class StartScreen {
 
         //Event-Handling für den start button
         /*Wenn die Maus den Start Button betritt, so ändert sich der Cursor. 
-         * Die Farbe des Textes des Buttons änder sich beim betreten, verlassen, klicken, drücken und loslassen des Buttons */
+         * Die Farbe des Textes des Buttons ändert sich beim betreten, verlassen, klicken, drücken und loslassen des Buttons */
         startButton.addMouseListener(new MouseListener() {
         @Override
         public void mousePressed(MouseEvent e) {

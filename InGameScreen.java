@@ -480,7 +480,7 @@ public class InGameScreen {
                 //Die sekunden werden um eins verringert
                 second--;
 
-                //Bedingung: Wenn die nullte Sekunde erreicht wird, wird die richtige Antwort angezeigt
+                //Bedingung: Wenn die Sekunden gleich null sind, wird die richtige Antwort angezeigt
                 if (second == 0) {
                     quizTimer.stop();
                     switch (fragen.get(fragenIndex-1).getRichtigeAntwort()) {
