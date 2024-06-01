@@ -98,11 +98,11 @@ public class InGameScreen {
         inGameBarPanel.add(scoreLabel);
         inGameBarPanel.add(timerLabel);
         
-        questionPanel.setBounds((MAINSCREEN_WIDTH / 2) - (800 / 2), 90, 800, 40);
+        questionPanel.setBounds((MAINSCREEN_WIDTH / 2) - (900 / 2), 90, 900, 40);
         questionPanel.setOpaque(false);
         mainScreenWindow.getContentPane().add(questionPanel);
         
-        questionLabel.setBounds((MAINSCREEN_WIDTH / 2) - (600 / 2), 90, 600, 40);
+        questionLabel.setBounds((MAINSCREEN_WIDTH / 2) - (800 / 2), 90, 800, 40);
         questionLabel.setOpaque(false);
         questionLabel.setForeground(Color.WHITE);
         questionPanel.add(questionLabel);
@@ -443,7 +443,6 @@ public class InGameScreen {
                         nextButton.setText("nächste Frage >");
                     }
 
-                   
                     answerAButton.setEnabled(false);
                     answerBButton.setEnabled(false);    
                     answerCButton.setEnabled(false);
