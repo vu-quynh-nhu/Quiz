@@ -1,10 +1,12 @@
+//Die Klasse definiert eine Frage im Quiz
 public class Frage {
-
+    //Variablen werden deklariert
     private String frage;
     private String[] antwort = new String[4];
     private String image;
     private char richtigeAntwort;
 
+    //Konstruktor der Klasse Frage
     public Frage(String frage, String antwortA, String antwortB, String antwortC, String antwortD, String image, char richtigeAntwort) {
         this.frage = frage;
         this.antwort[0] = antwortA;
@@ -15,6 +17,7 @@ public class Frage {
         this.richtigeAntwort = richtigeAntwort;
     }
 
+    // Getter-Methoden für die Variablen und die Antwortmöglichkeiten
     public String getFrage() {
         return frage;
     }

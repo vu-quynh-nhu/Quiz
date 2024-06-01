@@ -5,33 +5,36 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
+//Diese Klasse ist für den Category Screen
 public class CategoryScreen {
+        //Deklarierung aller GUI-Komponenten und der Fragen-Liste
         static JPanel choicePanel, choiceLabelPanel, categoryBackgroundPanel;
         static JLabel choiceLabel, choice1label, choice2label, choice3label, choice4label, categoryBackgroundLabel;
         static ImageIcon quizLogoIcon, gameIcon, questionImageIcon, medalImage, categoryBackgroundImage;
-        static final int MAINSCREEN_WIDTH = 1000;
-        static final int MAINSCREEN_HEIGHT = 700;
-        static final int QUIZLOGO_WIDTH = 681;
-        static final int QUIZLOGO_HEIGHT = 419;
         static JButton choice1Button, choice2Button, choice3Button, choice4Button;
         static ArrayList<Frage> fragen = new ArrayList<Frage>();
 
+        //Methode zum Anzeigen des Category Screen
         public static void showCategoryScreen(JFrame mainScreenWindow, JPanel quizLogoPanel) {
+                //Inialisierung der Farbe
                 Color cultureText = new Color(70, 159, 194);
-                Color background = new Color(71, 27, 158);
 
+                //Komponenten des voherigen Screens unsichtbar setzten
                 quizLogoPanel.setVisible(false);
                 StartScreen.startButton.setVisible(false);
 
+                //Erstellung des Container für der Auswahlbuttons und die Buttons
+                choicePanel = new JPanel();
                 choice1label = new JLabel();
                 choice2label = new JLabel();
                 choice3label = new JLabel();
                 choice4label = new JLabel();
 
-                choicePanel = new JPanel();
+                //Erstellung des Container für die Überschrift und das Label der Überschrift
                 choiceLabelPanel = new JPanel();
                 choiceLabel = new JLabel("Wähle eine Quiz Kategorie:");
 
+                //Setzung der Buttons mit ihrem jeweiligen Bild
                 ImageIcon food = new ImageIcon(".//res//foodQuestions/food-choice.jpg");
                 food.setImage(food.getImage().getScaledInstance(350, 210, Image.SCALE_DEFAULT));
                 choice1Button = new JButton(food);
@@ -41,14 +44,14 @@ public class CategoryScreen {
                 choice2Button = new JButton(harryPotter);
 
                 ImageIcon geography = new ImageIcon(".//res//geoQuestions/geography-choice.jpg");
-                // geography.setImage(geography.getImage().getScaledInstance(350, 200,
-                // Image.SCALE_DEFAULT));
+                geography.setImage(geography.getImage().getScaledInstance(350, 200,Image.SCALE_DEFAULT));
                 choice3Button = new JButton(geography);
 
                 ImageIcon culture = new ImageIcon(".//res//cultureQuestions/culture-choice.jpg");
                 culture.setImage(culture.getImage().getScaledInstance(350, 200, Image.SCALE_DEFAULT));
                 choice4Button = new JButton(culture);
 
+                //Schriftart anpassen für Label und Buttons
                 try {
                         Font archivoQuestion = Font
                                         .createFont(Font.TRUETYPE_FONT,
@@ -73,16 +76,19 @@ public class CategoryScreen {
                         ex.printStackTrace();
                 }
 
-                choiceLabelPanel.setBounds((MAINSCREEN_WIDTH / 2) - (600 / 2), 80, 600, 50);
+                //Anpassungen bei Contaniern und zum Fenster hinzufügen
+                choiceLabelPanel.setBounds((QuizUtils.MAINSCREEN_WIDTH  / 2) - (600 / 2), 80, 600, 50);
                 choiceLabelPanel.setOpaque(false);
                 mainScreenWindow.add(choiceLabelPanel);
 
                 choiceLabel.setForeground(Color.WHITE);
                 choiceLabelPanel.add(choiceLabel);
 
-                choicePanel.setBounds((MAINSCREEN_WIDTH / 2) - (800 / 2), MAINSCREEN_HEIGHT / 2 - (315 / 2), 800, 315);
+                choicePanel.setBounds((QuizUtils.MAINSCREEN_WIDTH  / 2) - (800 / 2), QuizUtils.MAINSCREEN_HEIGHT  / 2 - (315 / 2), 800, 315);
                 choicePanel.setOpaque(false);
 
+                //für jeweils jeden Button Größe,Breite und Rand anpassen und zum Container choicePanel hinzufügen
+                //Label mit Text erstellten und Schriftfarbe auf weiß setzen und zum Button hinzufügen
                 choice1Button.setPreferredSize(new Dimension(350, 150));
                 choice1Button.setBorder(null);
                 choice1Button.setFocusPainted(false);
@@ -124,60 +130,68 @@ public class CategoryScreen {
                 choice4label.setAlignmentX(0.07f);
                 choice4Button.add(choice4label);
 
+                //fügt den Container mit der Auswahl den Fenster hinzu
+                mainScreenWindow.add(choicePanel);
+
+                //für jeden Button ActionListener hinzufügen, der beim Anklicken die Fragen inialisiert
+                //und den CoundownScreen anzeigt
                 choice1Button.addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
                                 fragenInialisieren(1);
-                                CountdownScreen.showCountdownScreen(mainScreenWindow, choiceLabelPanel, choicePanel,
+                                CountdownScreen.showCountdownScreen(mainScreenWindow, categoryBackgroundPanel, choiceLabelPanel, choicePanel,
                                                 fragen);
                         }
                 });
-                addHoverEffect(choice1Button);
 
                 choice2Button.addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
                                 fragenInialisieren(2);
-                                CountdownScreen.showCountdownScreen(mainScreenWindow, choiceLabelPanel, choicePanel,
+                                CountdownScreen.showCountdownScreen(mainScreenWindow, categoryBackgroundPanel,choiceLabelPanel, choicePanel,
                                                 fragen);
 
                         }
                 });
-                addHoverEffect(choice2Button);
+
                 choice3Button.addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
                                 fragenInialisieren(3);
-                                CountdownScreen.showCountdownScreen(mainScreenWindow, choiceLabelPanel, choicePanel,
+                                CountdownScreen.showCountdownScreen(mainScreenWindow,categoryBackgroundPanel, choiceLabelPanel, choicePanel,
                                                 fragen);
                         }
                 });
-                addHoverEffect(choice3Button);
+
                 choice4Button.addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
                                 fragenInialisieren(4);
-                                CountdownScreen.showCountdownScreen(mainScreenWindow, choiceLabelPanel, choicePanel,
+                                CountdownScreen.showCountdownScreen(mainScreenWindow, categoryBackgroundPanel,choiceLabelPanel, choicePanel,
                                                 fragen);
                         }
                 });
+                //fügt jeden Button den HoverEffekt hinzu (durch Methodenaufruf)
+                addHoverEffect(choice1Button);
+                addHoverEffect(choice2Button);
+                addHoverEffect(choice3Button);
                 addHoverEffect(choice4Button);
 
-                mainScreenWindow.add(choicePanel);
-
+                //passt den Hintergrund des Screens an und fügt diesen den Fenster hinzu
                 categoryBackgroundImage = new ImageIcon(".//res//quiz/background.jpg");
-                categoryBackgroundImage.setImage(categoryBackgroundImage.getImage().getScaledInstance(MAINSCREEN_WIDTH, MAINSCREEN_HEIGHT, Image.SCALE_DEFAULT));
+                categoryBackgroundImage.setImage(categoryBackgroundImage.getImage().getScaledInstance(QuizUtils.MAINSCREEN_WIDTH , QuizUtils.MAINSCREEN_HEIGHT , Image.SCALE_DEFAULT));
                 categoryBackgroundPanel = new JPanel();
-                categoryBackgroundPanel.setBackground(background);
-                categoryBackgroundPanel.setBounds(0, 0, MAINSCREEN_WIDTH, MAINSCREEN_HEIGHT);
+                categoryBackgroundPanel.setBackground(QuizUtils.backgroundColor);
+                categoryBackgroundPanel.setBounds(0, 0, QuizUtils.MAINSCREEN_WIDTH , QuizUtils.MAINSCREEN_HEIGHT );
                 categoryBackgroundLabel = new JLabel();
-                categoryBackgroundLabel.setBackground(background);
+                categoryBackgroundLabel.setBackground(QuizUtils.backgroundColor);
                 categoryBackgroundLabel.setIcon(categoryBackgroundImage);
-                categoryBackgroundLabel.setBounds(0, 0, MAINSCREEN_WIDTH, MAINSCREEN_HEIGHT);
+                categoryBackgroundLabel.setBounds(0, 0, QuizUtils.MAINSCREEN_WIDTH , QuizUtils.MAINSCREEN_HEIGHT );
                 categoryBackgroundPanel.add(categoryBackgroundLabel);
                 mainScreenWindow.add(categoryBackgroundPanel); 
         }
 
+        //inialisiert die Liste mit der ausgewählten Kategorie
         public static void fragenInialisieren(int zahl) {
                 // Essen Quiz
                 ArrayList<Frage> essensFragen = new ArrayList<Frage>();
@@ -272,9 +286,9 @@ public class CategoryScreen {
                 geografieFragen.add(new Frage("Welches Land hat die meisten Zeitzone auf der Welt?", "Großbritannien",
                                 "Russland", "USA", "Frankreich", ".//res//geoQuestions/zeitzonen.jpeg", 'D'));
 
-                // Java Quiz
-                ArrayList<Frage> javaFragen = new ArrayList<Frage>();
-                javaFragen.add(
+                // Kultur Quiz
+                ArrayList<Frage> cultureFragen = new ArrayList<Frage>();
+                cultureFragen.add(
                                 new Frage("Was ist Java?", "Donau", "Oka", "Wolgau", "Don",
                                                 ".//res//javaQuestions/test.png", 'C'));
 
@@ -289,14 +303,14 @@ public class CategoryScreen {
                                 fragen = geografieFragen;
                                 break;
                         case 4:
-                                fragen = javaFragen;
+                                fragen = cultureFragen;
                                 break;
                         default:
                                 break;
                 }
         }
 
-        // Hover effect
+        //Fügt den Hover-Effekt einen Button durch einen MouseAdapter hinzu
         private static void addHoverEffect(JButton button) {
                 button.addMouseListener(new MouseAdapter() {
                         @Override

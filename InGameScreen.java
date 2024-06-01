@@ -11,8 +11,6 @@ public class InGameScreen {
     static JPanel quizLogoPanel, inGameBarPanel, questionPanel, answerPanel, questionImagePanel, nextButtonPanel, inGameBackgroundPanel;
     static JLabel quizLogoLabel, questionLabel, questionNumberLabel, scoreLabel, timerLabel, questionImageLabel, inGameBackgroundLabel;
     static ImageIcon questionImageIcon, inGameBackgroundImage;
-    static final int MAINSCREEN_WIDTH = 1000;
-    static final int MAINSCREEN_HEIGHT = 700;
     static JButton answerAButton, answerBButton, answerCButton, answerDButton, nextButton;
     static int fragenIndex = 1;
     static int second;
@@ -30,7 +28,6 @@ public class InGameScreen {
         //benutzerdefinierte Farben
         Color quizImageBorder = new Color(161, 36, 203);
         Color answerText = new Color(122, 31, 182);
-        Color background = new Color(71, 27, 158);
 
         //Dekativierung des letzten Screens (Countdown Screen)
         CountdownScreen.countdownBackgroundPanel.setVisible(false);
@@ -39,22 +36,27 @@ public class InGameScreen {
         //Punkte am Anfang auf null setzen
         scoreCount = 0;
 
+        //oberer Container für momentane Frage, Punkte und Zeit wird erstellt
         inGameBarPanel = new JPanel();
-        //String für den Fragen Label
+        //FragenLabel wird erstellt und zentriert
         String questionNumString = "Frage " + fragenIndex + " / " + fragen.size();
         questionNumberLabel = new JLabel(questionNumString, SwingConstants.CENTER);
-        //String für den Punkte Label
+        //Punkte Label wird erstellt und zentriert
         scoreLabel = new JLabel("Punkte: " + scoreCount, SwingConstants.CENTER);
-        //String für den Timer Label
+        //Timer Label wird erstellt und zentriert
         timerLabel = new JLabel("Zeit: 30", SwingConstants.CENTER);
 
+        //Container und Label für die Quiz-Frage wird erstellt
         questionPanel = new JPanel();
         questionLabel = new JLabel(fragen.get(fragenIndex-1).getFrage(), SwingConstants.CENTER);
 
+        //Container und Label für das Quiz-Bild wird erstellt
         questionImagePanel = new JPanel();
         questionImageLabel = new JLabel();
+        //Quiz-Bild wird mit dem akutellem Quizbild inialisiert
         questionImageIcon = new ImageIcon(fragen.get(fragenIndex-1).getImage());
 
+        //Container und Buttons für die Quiz-Antworten werden erstellt
         answerPanel = new JPanel();
         //Antwort Buttons mit den jeweiligen Antworten initialisieren 
         answerAButton = new JButton(fragen.get(fragenIndex-1).getAntwortA());
@@ -62,9 +64,9 @@ public class InGameScreen {
         answerCButton = new JButton(fragen.get(fragenIndex-1).getAntwortC());
         answerDButton = new JButton(fragen.get(fragenIndex-1).getAntwortD());
 
-        nextButton = new JButton("überspringen >");
-
+        //Container und Button zum weiterklicken der nächsten Frage werden erstellt
         nextButtonPanel = new JPanel();
+        nextButton = new JButton("überspringen >");
 
         //benutzerdefinierte Schriftart
         try {
@@ -87,8 +89,9 @@ public class InGameScreen {
         }
 
         //alle relevanten Komponente werden hier angepasst (Größe, Farbe, Text, etc.)
-        inGameBarPanel.setBounds((MAINSCREEN_WIDTH / 2) - (970 / 2), 0, 970, 50);
+        inGameBarPanel.setBounds((QuizUtils.MAINSCREEN_WIDTH  / 2) - (970 / 2), 0, 970, 50);
         inGameBarPanel.setOpaque(false);
+        //der Container bekommt ein Tabellenlayout mit einer Zeile und drei Spalten inialisiert
         inGameBarPanel.setLayout(new GridLayout(1, 3));
         mainScreenWindow.getContentPane().add(inGameBarPanel);
 
@@ -96,25 +99,28 @@ public class InGameScreen {
         scoreLabel.setForeground(Color.WHITE);
         timerLabel.setForeground(Color.WHITE);
 
-        //Der Timer ist 30 Sekunden lang
+        //Der Timer wird auf 30 Sekunden gesetzt und gestartet
         second = 30;
         quizCountdown(fragen);
         quizTimer.start();
 
+        //Dem Container werden die drei Labels hinzugefügt
         inGameBarPanel.add(questionNumberLabel);
         inGameBarPanel.add(scoreLabel);
         inGameBarPanel.add(timerLabel);
         
-        questionPanel.setBounds((MAINSCREEN_WIDTH / 2) - (900 / 2), 90, 900, 40);
+        //Für jedenContainer werden die Attribute gesetzt(Unsichtbar,Position, Breite, Höhe, etc.)
+        //und zum JFrame hinzugefügt
+        questionPanel.setBounds((QuizUtils.MAINSCREEN_WIDTH  / 2) - (900 / 2), 90, 900, 40);
         questionPanel.setOpaque(false);
         mainScreenWindow.getContentPane().add(questionPanel);
         
-        questionLabel.setBounds((MAINSCREEN_WIDTH / 2) - (800 / 2), 90, 800, 40);
+        questionLabel.setBounds((QuizUtils.MAINSCREEN_WIDTH  / 2) - (800 / 2), 90, 800, 40);
         questionLabel.setOpaque(false);
         questionLabel.setForeground(Color.WHITE);
         questionPanel.add(questionLabel);
 
-        questionImagePanel.setBounds((MAINSCREEN_WIDTH / 2) - (420 / 2), 140, 420, 228);
+        questionImagePanel.setBounds((QuizUtils.MAINSCREEN_WIDTH  / 2) - (420 / 2), 140, 420, 228);
         questionImagePanel.setBackground(quizImageBorder);
         mainScreenWindow.getContentPane().add(questionImagePanel);
         questionImagePanel.add(questionImageLabel);
@@ -124,7 +130,10 @@ public class InGameScreen {
         mainScreenWindow.getContentPane().add(answerPanel);
         answerPanel.setBackground(Color.BLACK);
         answerPanel.setOpaque(false);
-        answerPanel.setBounds((MAINSCREEN_WIDTH / 2) - (800 / 2), 420, 800, 150);
+        answerPanel.setBounds((QuizUtils.MAINSCREEN_WIDTH  / 2) - (800 / 2), 420, 800, 150);
+
+        //Für jeden AntwortButton werden die Attribute: Größe,Textfarbe,Hintergrundfarbe,Rand gesetzt
+        //und zum Container hinzugefügt
         answerAButton.setPreferredSize(new Dimension(350, 68));
         answerAButton.setBackground(Color.WHITE);
         answerAButton.setForeground(answerText);
@@ -259,6 +268,8 @@ public class InGameScreen {
             }
         });
 
+        //Für den Container und den Button werden die Attribute gesetzt
+        //wie Position, Breite, Höhe, Textfarbe etc.
         nextButtonPanel.setOpaque(false);
         nextButtonPanel.setBounds(760, 585, 200, 50);
         mainScreenWindow.add(nextButtonPanel);
@@ -280,18 +291,19 @@ public class InGameScreen {
                 if (fragenIndex < fragen.size()) {
                     //index wird erhöht
                     fragenIndex++;
-                    //aktuelle Anzahl der Fragen wird gesetzt
+                    //aktuelle Anzahl der Fragen wird im Label angepasst
                     String questionNumString = "Frage " + fragenIndex + " / " + fragen.size();
                     questionNumberLabel.setText(questionNumString);
 
-                    //fragen und Antworten werden mit dem aktuellen index geholt und als Text für den Frage Label und für die Antwort Buttons gesetzt 
+                    //Fragen und Antworten werden mit dem aktuellen index geholt und 
+                    //als Text für den Frage Label und für die Antwort Buttons gesetzt 
                     questionLabel.setText(fragen.get(fragenIndex-1).getFrage());
                     answerAButton.setText(fragen.get(fragenIndex-1).getAntwortA());
                     answerBButton.setText(fragen.get(fragenIndex-1).getAntwortB());
                     answerCButton.setText(fragen.get(fragenIndex-1).getAntwortC());
                     answerDButton.setText(fragen.get(fragenIndex-1).getAntwortD());
 
-                    //bild mit dem aktuellen index anzeigen 
+                    //neues Bild wird aus der Liste geholt 
                     String path = fragen.get(fragenIndex-1).getImage();
                     questionImageIcon.setImage(new ImageIcon(path).getImage());
                     //vorheriges Bild wird von Label entfernt und das neue angezeigt
@@ -303,7 +315,7 @@ public class InGameScreen {
                     answerCButton.setEnabled(true);
                     answerDButton.setEnabled(true);
 
-                    //Schriftfarbe bei allen buttons auf weiß gesetzt 
+                    //Schriftfarbe bei allen Buttons auf weiß gesetzt 
                     answerAButton.setBackground(Color.WHITE);
                     answerBButton.setBackground(Color.WHITE);
                     answerCButton.setBackground(Color.WHITE);
@@ -367,7 +379,7 @@ public class InGameScreen {
                 //String für die Richtige Antwort
                 String correctAnswer = "";
 
-                //richtige Antwort von der aktuellen Frage in den String setzen
+                //richtige Antwort von der aktuellen Frage in den String correctAnswer setzen
                 switch (fragen.get(fragenIndex-1).getRichtigeAntwort()) {
                     case 'A': correctAnswer = fragen.get(fragenIndex-1).getAntwortA();
                         break;
@@ -382,6 +394,7 @@ public class InGameScreen {
                 }              
 
                 //Bedingung: Vergleich des Textes des angeklickten Buttons mit der richtigen Antwort der aktuellen Frage
+                //wenn die richtige Antwortmöglichkeit ausgewählt wurde 
                 if (chosenAnswer.getText().equals(correctAnswer)) {
                     //Timer wird gestoppt
                     quizTimer.stop();
@@ -393,7 +406,7 @@ public class InGameScreen {
                     gameSoundEffect.startSoundEffect();
                     //Die Farbe des Buttons wird auf grün gesetzt 
                     chosenAnswer.setBackground(Color.GREEN);
-                    //veränderung des next Button textes, je nach index
+                    //Veränderung des next Button Textes, je nach index
                     if (fragenIndex == fragen.size()) {
                         nextButton.setText("Quiz-Ende >");
                     } else {
@@ -422,7 +435,7 @@ public class InGameScreen {
                         default:
                             break;
                     }
-                    //veränderung des next Button textes, je nach index
+                    //Veränderung des next Button textes, je nach index
                     if (fragenIndex == fragen.size()) {
                         nextButton.setText("Quiz-Ende >");
                     } else {
@@ -446,14 +459,14 @@ public class InGameScreen {
 
         //Der Hintergrund wird gesetzt
         inGameBackgroundImage = new ImageIcon(".//res//quiz/background.jpg");
-        inGameBackgroundImage.setImage(inGameBackgroundImage.getImage().getScaledInstance(MAINSCREEN_WIDTH, MAINSCREEN_HEIGHT, Image.SCALE_DEFAULT));
+        inGameBackgroundImage.setImage(inGameBackgroundImage.getImage().getScaledInstance(QuizUtils.MAINSCREEN_WIDTH , QuizUtils.MAINSCREEN_HEIGHT , Image.SCALE_DEFAULT));
         inGameBackgroundPanel = new JPanel();
-        inGameBackgroundPanel.setBackground(background);
-        inGameBackgroundPanel.setBounds(0, 0, MAINSCREEN_WIDTH, MAINSCREEN_HEIGHT);
+        inGameBackgroundPanel.setBackground(QuizUtils.backgroundColor);
+        inGameBackgroundPanel.setBounds(0, 0, QuizUtils.MAINSCREEN_WIDTH , QuizUtils.MAINSCREEN_HEIGHT );
         inGameBackgroundLabel = new JLabel();
-        inGameBackgroundLabel.setBackground(background);
+        inGameBackgroundLabel.setBackground(QuizUtils.backgroundColor);
         inGameBackgroundLabel.setIcon(inGameBackgroundImage);
-        inGameBackgroundLabel.setBounds(0, 0, MAINSCREEN_WIDTH, MAINSCREEN_HEIGHT);
+        inGameBackgroundLabel.setBounds(0, 0, QuizUtils.MAINSCREEN_WIDTH , QuizUtils.MAINSCREEN_HEIGHT );
         inGameBackgroundPanel.add(inGameBackgroundLabel);
         mainScreenWindow.add(inGameBackgroundPanel); 
     }
@@ -467,7 +480,7 @@ public class InGameScreen {
                 //Die sekunden werden um eins verringert
                 second--;
 
-                //wenn die nullte Sekunde erreicht wird, wird die richtige Antwort angezeigt
+                //Bedingung: Wenn die nullte Sekunde erreicht wird, wird die richtige Antwort angezeigt
                 if (second == 0) {
                     quizTimer.stop();
                     switch (fragen.get(fragenIndex-1).getRichtigeAntwort()) {
@@ -482,7 +495,7 @@ public class InGameScreen {
                         default:
                             break;
                     }
-                    //veränderung des next Button textes, je nach index
+                    //Veränderung des next Button Textes, je nach index
                     if (fragenIndex == fragen.size()) {
                         nextButton.setText("Quiz-Ende >");
                     } else {
