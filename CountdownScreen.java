@@ -5,9 +5,10 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class CountdownScreen {
-    static JPanel gameCountdownPanel;
-    static JLabel gameCountdownLabel;
+public class CountdownScreen{
+    static JPanel gameCountdownPanel, countdownBackgroundPanel;
+    static JLabel gameCountdownLabel, countdownBackgroundLabel;
+    static ImageIcon countdownBackgroundImage;
     static String startTimerSound;
     static final int MAINSCREEN_WIDTH = 1000;
     static final int MAINSCREEN_HEIGHT = 700;
@@ -16,9 +17,10 @@ public class CountdownScreen {
     static GameSoundEffect gameSoundEffect = new GameSoundEffect();
 
     public static void showCountdownScreen(JFrame mainScreenWindow, JPanel choiceLabelPanel, JPanel choicePanel, ArrayList<Frage> fragen) {
+        CategoryScreen.categoryBackgroundPanel.setVisible(false);
         choiceLabelPanel.setVisible(false);
         choicePanel.setVisible(false);
-        //backgroundPanel.setVisible(false);
+
         //Custom Colors
         Color background = new Color(71, 27, 158);
 
@@ -51,21 +53,18 @@ public class CountdownScreen {
         gameSoundEffect.setFile(startTimerSound);
         gameSoundEffect.startSoundEffect();
 
-
-       /*  //Background
-        backgroundImage = new ImageIcon(".//res//quiz/background.jpg");
-        backgroundImage.setImage(backgroundImage.getImage().getScaledInstance(MAINSCREEN_WIDTH, MAINSCREEN_HEIGHT, Image.SCALE_DEFAULT));
-        backgroundPanel = new JPanel();
-        backgroundPanel.setBackground(background);
-        backgroundPanel.setBounds(0, 0, MAINSCREEN_WIDTH, MAINSCREEN_HEIGHT);
-        backgroundLabel = new JLabel();
-        backgroundLabel.setBackground(background);
-        backgroundLabel.setIcon(backgroundImage);
-        backgroundLabel.setBounds(0, 0, MAINSCREEN_WIDTH, MAINSCREEN_HEIGHT);
-        backgroundPanel.add(backgroundLabel);
-        mainScreenWindow.add(backgroundPanel); */
+        countdownBackgroundImage = new ImageIcon(".//res//quiz/background.jpg");
+        countdownBackgroundImage.setImage(countdownBackgroundImage.getImage().getScaledInstance(MAINSCREEN_WIDTH, MAINSCREEN_HEIGHT, Image.SCALE_DEFAULT));
+        countdownBackgroundPanel = new JPanel();
+        countdownBackgroundPanel.setBackground(background);
+        countdownBackgroundPanel.setBounds(0, 0, MAINSCREEN_WIDTH, MAINSCREEN_HEIGHT);
+        countdownBackgroundLabel = new JLabel();
+        countdownBackgroundLabel.setBackground(background);
+        countdownBackgroundLabel.setIcon(countdownBackgroundImage);
+        countdownBackgroundLabel.setBounds(0, 0, MAINSCREEN_WIDTH, MAINSCREEN_HEIGHT);
+        countdownBackgroundPanel.add(countdownBackgroundLabel);
+        mainScreenWindow.add(countdownBackgroundPanel); 
     }
-    
 
     public static void startTimer(JFrame mainScreenWindow, ArrayList<Frage> fragen) {
         startTimer = new Timer(1000, new ActionListener() {

@@ -6,9 +6,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class InGameScreen {
-    static JPanel quizLogoPanel, inGameBarPanel, questionPanel, answerPanel, questionImagePanel;
-    static JLabel quizLogoLabel, questionLabel, questionNumberLabel, scoreLabel, timerLabel, questionImageLabel;
-    static ImageIcon questionImageIcon;
+    static JPanel quizLogoPanel, inGameBarPanel, questionPanel, answerPanel, questionImagePanel, nextButtonPanel, inGameBackgroundPanel;
+    static JLabel quizLogoLabel, questionLabel, questionNumberLabel, scoreLabel, timerLabel, questionImageLabel, inGameBackgroundLabel;
+    static ImageIcon questionImageIcon, inGameBackgroundImage;
     static final int MAINSCREEN_WIDTH = 1000;
     static final int MAINSCREEN_HEIGHT = 700;
     static JButton answerAButton, answerBButton, answerCButton, answerDButton, nextButton;
@@ -29,8 +29,8 @@ public class InGameScreen {
         Color background = new Color(71, 27, 158);
 
         //disable logo panel and button
+        CountdownScreen.countdownBackgroundPanel.setVisible(false);
         gameCountdownPanel.setVisible(false);
-        //backgroundPanel.setVisible(false);
         scoreCount = 0;
 
         inGameBarPanel = new JPanel();
@@ -56,6 +56,9 @@ public class InGameScreen {
         answerDButton = new JButton(fragen.get(fragenIndex-1).getAntwortD());
 
         nextButton = new JButton("überspringen >");
+
+        nextButtonPanel = new JPanel();
+
         //custom font
         try {
             Font archivoQuestion = Font.createFont(Font.TRUETYPE_FONT, new File( ".//fonts//Archivo-VariableFont_wdth,wght.ttf")).deriveFont(20f);
@@ -80,7 +83,6 @@ public class InGameScreen {
         }
 
         inGameBarPanel.setBounds((MAINSCREEN_WIDTH / 2) - (970 / 2), 0, 970, 50);
-        inGameBarPanel.setBackground(Color.BLACK);
         inGameBarPanel.setOpaque(false);
         inGameBarPanel.setLayout(new GridLayout(1, 3));
         mainScreenWindow.getContentPane().add(inGameBarPanel);
@@ -97,16 +99,12 @@ public class InGameScreen {
         inGameBarPanel.add(timerLabel);
         
         questionPanel.setBounds((MAINSCREEN_WIDTH / 2) - (800 / 2), 90, 800, 40);
-        questionPanel.setBackground(Color.BLACK);
         questionPanel.setOpaque(false);
         mainScreenWindow.getContentPane().add(questionPanel);
         
         questionLabel.setBounds((MAINSCREEN_WIDTH / 2) - (600 / 2), 90, 600, 40);
-        questionLabel.setBackground(Color.BLACK);
         questionLabel.setOpaque(false);
         questionLabel.setForeground(Color.WHITE);
-        //automatically creates a next line
-        //questionArea.setLineWrap(true);
         questionPanel.add(questionLabel);
 
         questionImagePanel.setBounds((MAINSCREEN_WIDTH / 2) - (420 / 2), 140, 420, 228);
@@ -254,13 +252,17 @@ public class InGameScreen {
             }
         });
 
+        nextButtonPanel.setOpaque(false);
+        nextButtonPanel.setBounds(760, 585, 200, 50);
+        mainScreenWindow.add(nextButtonPanel);
+
         //next button
         nextButton.setBounds(760, 585, 200, 50);
         nextButton.setBorder(null);
         nextButton.setFocusPainted(false);
         nextButton.setForeground(Color.WHITE);
         nextButton.setContentAreaFilled(false);
-        mainScreenWindow.add(nextButton);
+        nextButtonPanel.add(nextButton);
 
 
         nextButton.addActionListener(new ActionListener() {
@@ -400,18 +402,17 @@ public class InGameScreen {
         answerCButton.addActionListener(actionListener);
         answerDButton.addActionListener(actionListener);
 
-        //Background
-       /*  backgroundImage = new ImageIcon(".//res//quiz/background.jpg");
-        backgroundImage.setImage(backgroundImage.getImage().getScaledInstance(MAINSCREEN_WIDTH, MAINSCREEN_HEIGHT, Image.SCALE_DEFAULT));
-        backgroundPanel = new JPanel();
-        backgroundPanel.setBackground(background);
-        backgroundPanel.setBounds(0, 0, MAINSCREEN_WIDTH, MAINSCREEN_HEIGHT);
-        backgroundLabel = new JLabel();
-        backgroundLabel.setBackground(background);
-        backgroundLabel.setIcon(backgroundImage);
-        backgroundLabel.setBounds(0, 0, MAINSCREEN_WIDTH, MAINSCREEN_HEIGHT);
-        backgroundPanel.add(backgroundLabel);
-        mainScreenWindow.add(backgroundPanel);*/
+        inGameBackgroundImage = new ImageIcon(".//res//quiz/background.jpg");
+        inGameBackgroundImage.setImage(inGameBackgroundImage.getImage().getScaledInstance(MAINSCREEN_WIDTH, MAINSCREEN_HEIGHT, Image.SCALE_DEFAULT));
+        inGameBackgroundPanel = new JPanel();
+        inGameBackgroundPanel.setBackground(background);
+        inGameBackgroundPanel.setBounds(0, 0, MAINSCREEN_WIDTH, MAINSCREEN_HEIGHT);
+        inGameBackgroundLabel = new JLabel();
+        inGameBackgroundLabel.setBackground(background);
+        inGameBackgroundLabel.setIcon(inGameBackgroundImage);
+        inGameBackgroundLabel.setBounds(0, 0, MAINSCREEN_WIDTH, MAINSCREEN_HEIGHT);
+        inGameBackgroundPanel.add(inGameBackgroundLabel);
+        mainScreenWindow.add(inGameBackgroundPanel); 
     }
     
     //quiz countdown

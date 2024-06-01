@@ -5,15 +5,16 @@ import java.io.File;
 import java.io.IOException;
 
 public class EndScreen {
-    static JPanel gameOverPanel, pointsPanel, remarkPanel, medalPanel;
-    static JLabel gameOverLabel, pointsLabel, remarkLabel, medalLabel;
-    static ImageIcon medalImage;
+    static JPanel gameOverPanel, pointsPanel, remarkPanel, medalPanel, endBackgroundPanel;
+    static JLabel gameOverLabel, pointsLabel, remarkLabel, medalLabel, endBackgroundLabel;
+    static ImageIcon medalImage, endBackgroundImage;
     static final int MAINSCREEN_WIDTH = 1000;
     static final int MAINSCREEN_HEIGHT = 700;
     static JButton playAgainButton, exitGameButton;
     static GameSoundEffect gameSoundEffect = new GameSoundEffect();
 
     public static void showEndScreen(JFrame mainScreenWindow, JPanel inGameBarPanel, JPanel questionPanel, JPanel questionImagePanel, JPanel answerPanel, JButton nextButton, int scoreCount, Timer quizTimer) {
+        InGameScreen.inGameBackgroundPanel.setVisible(false);
         inGameBarPanel.setVisible(false);
         questionPanel.setVisible(false);
         questionImagePanel.setVisible(false);
@@ -169,6 +170,7 @@ public class EndScreen {
                 //selectQuestionSet();
                 InGameScreen.setFragenIndex(1);
                 CategoryScreen.showCategoryScreen(mainScreenWindow, answerPanel, nextButton);
+                endBackgroundPanel.setVisible(false);
             }
         });
         mainScreenWindow.add(playAgainButton);
@@ -214,6 +216,18 @@ public class EndScreen {
             }
         });
         mainScreenWindow.add(exitGameButton);
+
+        endBackgroundImage = new ImageIcon(".//res//quiz/background.jpg");
+        endBackgroundImage.setImage(endBackgroundImage.getImage().getScaledInstance(MAINSCREEN_WIDTH, MAINSCREEN_HEIGHT, Image.SCALE_DEFAULT));
+        endBackgroundPanel = new JPanel();
+        endBackgroundPanel.setBackground(background);
+        endBackgroundPanel.setBounds(0, 0, MAINSCREEN_WIDTH, MAINSCREEN_HEIGHT);
+        endBackgroundLabel = new JLabel();
+        endBackgroundLabel.setBackground(background);
+        endBackgroundLabel.setIcon(endBackgroundImage);
+        endBackgroundLabel.setBounds(0, 0, MAINSCREEN_WIDTH, MAINSCREEN_HEIGHT);
+        endBackgroundPanel.add(endBackgroundLabel);
+        mainScreenWindow.add(endBackgroundPanel); 
     }
     
 }
