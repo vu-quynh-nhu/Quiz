@@ -13,13 +13,13 @@ public class EndScreen {
     static JButton playAgainButton, exitGameButton;
     static GameSoundEffect gameSoundEffect = new GameSoundEffect();
 
-    public static void showEndScreen(JFrame mainScreenWindow, JPanel inGameBarPanel, JPanel questionPanel, JPanel questionImagePanel, JPanel answerPanel, JButton nextButton, int scoreCount, Timer quizTimer) {
+    public static void showEndScreen(JFrame mainScreenWindow, JPanel inGameBarPanel, JPanel questionPanel, JPanel questionImagePanel, JPanel answerPanel, JPanel nextButtonPanel, int scoreCount, Timer quizTimer) {
         InGameScreen.inGameBackgroundPanel.setVisible(false);
         inGameBarPanel.setVisible(false);
         questionPanel.setVisible(false);
         questionImagePanel.setVisible(false);
         answerPanel.setVisible(false);
-        nextButton.setVisible(false);
+        nextButtonPanel.setVisible(false);
 
         //Custom Colors
         Color background = new Color(71, 27, 158);
@@ -163,13 +163,10 @@ public class EndScreen {
                 remarkPanel.setVisible(false);
                 playAgainButton.setVisible(false);
                 exitGameButton.setVisible(false);
-                //backgroundPanel.setVisible(false);
                 quizTimer.stop();
                 //reset question index
-                //fragenIndex = 1;
-                //selectQuestionSet();
                 InGameScreen.setFragenIndex(1);
-                CategoryScreen.showCategoryScreen(mainScreenWindow, answerPanel, nextButton);
+                CategoryScreen.showCategoryScreen(mainScreenWindow, answerPanel);
                 endBackgroundPanel.setVisible(false);
             }
         });

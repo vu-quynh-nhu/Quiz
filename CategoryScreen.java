@@ -16,12 +16,12 @@ public class CategoryScreen {
         static JButton choice1Button, choice2Button, choice3Button, choice4Button;
         static ArrayList<Frage> fragen = new ArrayList<Frage>();
 
-        public static void showCategoryScreen(JFrame mainScreenWindow, JPanel quizLogoPanel, JButton startButton) {
+        public static void showCategoryScreen(JFrame mainScreenWindow, JPanel quizLogoPanel) {
                 Color cultureText = new Color(70, 159, 194);
                 Color background = new Color(71, 27, 158);
 
                 quizLogoPanel.setVisible(false);
-                startButton.setVisible(false);
+                StartScreen.startButton.setVisible(false);
 
                 choice1label = new JLabel();
                 choice2label = new JLabel();

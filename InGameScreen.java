@@ -5,7 +5,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
+//Diese Klasse ist für den In Game Screen
 public class InGameScreen {
+    //Deklarierung aller GUI-Komponente und Variablen
     static JPanel quizLogoPanel, inGameBarPanel, questionPanel, answerPanel, questionImagePanel, nextButtonPanel, inGameBackgroundPanel;
     static JLabel quizLogoLabel, questionLabel, questionNumberLabel, scoreLabel, timerLabel, questionImageLabel, inGameBackgroundLabel;
     static ImageIcon questionImageIcon, inGameBackgroundImage;
@@ -18,28 +20,32 @@ public class InGameScreen {
     static Timer quizTimer;
     static GameSoundEffect gameSoundEffect = new GameSoundEffect();
 
+    //Methode zum Setzen des Fragenindex
     public static void setFragenIndex(int fragenIndex) {
         InGameScreen.fragenIndex = fragenIndex;
     }
 
+    //Methode zum anzeigen des In Game Screens
     public static void showInGameScreen(JFrame mainScreenWindow, JPanel gameCountdownPanel, ArrayList<Frage> fragen) {
-        //custom Colors
+        //benutzerdefinierte Farben
         Color quizImageBorder = new Color(161, 36, 203);
         Color answerText = new Color(122, 31, 182);
         Color background = new Color(71, 27, 158);
 
-        //disable logo panel and button
+        //Dekativierung des letzten Screens (Countdown Screen)
         CountdownScreen.countdownBackgroundPanel.setVisible(false);
         gameCountdownPanel.setVisible(false);
+
+        //Punkte am Anfang auf null setzen
         scoreCount = 0;
 
         inGameBarPanel = new JPanel();
-        //increases when next/skipp Button was clicked
+        //String für den Fragen Label
         String questionNumString = "Frage " + fragenIndex + " / " + fragen.size();
         questionNumberLabel = new JLabel(questionNumString, SwingConstants.CENTER);
-        //increases when answer is right and next Button was clicked
+        //String für den Punkte Label
         scoreLabel = new JLabel("Punkte: " + scoreCount, SwingConstants.CENTER);
-        //restarts when next/skipp Button was clicked
+        //String für den Timer Label
         timerLabel = new JLabel("Zeit: 30", SwingConstants.CENTER);
 
         questionPanel = new JPanel();
@@ -50,6 +56,7 @@ public class InGameScreen {
         questionImageIcon = new ImageIcon(fragen.get(fragenIndex-1).getImage());
 
         answerPanel = new JPanel();
+        //Antwort Buttons mit den jeweiligen Antworten initialisieren 
         answerAButton = new JButton(fragen.get(fragenIndex-1).getAntwortA());
         answerBButton = new JButton(fragen.get(fragenIndex-1).getAntwortB());
         answerCButton = new JButton(fragen.get(fragenIndex-1).getAntwortC());
@@ -59,29 +66,27 @@ public class InGameScreen {
 
         nextButtonPanel = new JPanel();
 
-        //custom font
+        //benutzerdefinierte Schriftart
         try {
             Font archivoQuestion = Font.createFont(Font.TRUETYPE_FONT, new File( ".//fonts//Archivo-VariableFont_wdth,wght.ttf")).deriveFont(20f);
             GraphicsEnvironment graphicsEnvironment = GraphicsEnvironment.getLocalGraphicsEnvironment();
             graphicsEnvironment.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File(".//fonts//Archivo-VariableFont_wdth,wght.ttf")));
-            //set custom font for label and button
+            //benutzerdefinierte Schriftart für die Komponenten setzen
             questionNumberLabel.setFont(archivoQuestion);
             scoreLabel.setFont(archivoQuestion);
             timerLabel.setFont(archivoQuestion);
-            
-            //startButton.setFont(new Font(startButton.getFont().getName(), startButton.getFont().getStyle(), 22));
+            //für den Question Label wird die Schriftgröße auf 24 gesetzt
             questionLabel.setFont(new Font(questionLabel.getFont().getName(), questionLabel.getFont().getStyle(), 24));
             answerAButton.setFont(archivoQuestion);
             answerBButton.setFont(archivoQuestion);
             answerCButton.setFont(archivoQuestion);
             answerDButton.setFont(archivoQuestion);
             nextButton.setFont(archivoQuestion);
-            //resize font for button
-            //startButton.setFont(new Font(startButton.getFont().getName(), startButton.getFont().getStyle(), 22));
         } catch (FontFormatException | IOException ex) {
             ex.printStackTrace();
         }
 
+        //alle relevanten Komponente werden hier angepasst (Größe, Farbe, Text, etc.)
         inGameBarPanel.setBounds((MAINSCREEN_WIDTH / 2) - (970 / 2), 0, 970, 50);
         inGameBarPanel.setOpaque(false);
         inGameBarPanel.setLayout(new GridLayout(1, 3));
@@ -90,6 +95,8 @@ public class InGameScreen {
         questionNumberLabel.setForeground(Color.WHITE);
         scoreLabel.setForeground(Color.WHITE);
         timerLabel.setForeground(Color.WHITE);
+
+        //Der Timer ist 30 Sekunden lang
         second = 30;
         quizCountdown(fragen);
         quizTimer.start();
@@ -114,7 +121,6 @@ public class InGameScreen {
         questionImageIcon.setImage(questionImageIcon.getImage().getScaledInstance(410, 218, Image.SCALE_DEFAULT));
         questionImageLabel.setIcon(questionImageIcon);
 
-
         mainScreenWindow.getContentPane().add(answerPanel);
         answerPanel.setBackground(Color.BLACK);
         answerPanel.setOpaque(false);
@@ -127,7 +133,6 @@ public class InGameScreen {
         answerPanel.add(answerAButton);
 
         answerBButton.setPreferredSize(new Dimension(350, 68));
-
         answerBButton.setBackground(Color.WHITE);
         answerBButton.setForeground(answerText);
         answerBButton.setBorder(null);
@@ -148,6 +153,8 @@ public class InGameScreen {
         answerDButton.setFocusPainted(false);
         answerPanel.add(answerDButton);
         
+        //Event-Handling für alle Antwort Buttons
+        //Wenn die Maus die Buttons betritt, so ändert sich der Cursor
         answerAButton.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -256,7 +263,6 @@ public class InGameScreen {
         nextButtonPanel.setBounds(760, 585, 200, 50);
         mainScreenWindow.add(nextButtonPanel);
 
-        //next button
         nextButton.setBounds(760, 585, 200, 50);
         nextButton.setBorder(null);
         nextButton.setFocusPainted(false);
@@ -264,52 +270,66 @@ public class InGameScreen {
         nextButton.setContentAreaFilled(false);
         nextButtonPanel.add(nextButton);
 
-
+        //Event-Handling für den next button
+        //Action Listener am Button hinzugefügt
         nextButton.addActionListener(new ActionListener() {
+            //in dieser Metode wird das Verhalten des next Buttons definiert
             @Override
             public void actionPerformed(ActionEvent e) {
+                //Bedingung, solange Fragenindex kleiner als 10 ist
                 if (fragenIndex < fragen.size()) {
+                    //index wird erhöht
                     fragenIndex++;
-                    //increases when next/skipp Button was clicked
+                    //aktuelle Anzahl der Fragen wird gesetzt
                     String questionNumString = "Frage " + fragenIndex + " / " + fragen.size();
                     questionNumberLabel.setText(questionNumString);
 
+                    //fragen und Antworten werden mit dem aktuellen index geholt und als Text für den Frage Label und für die Antwort Buttons gesetzt 
                     questionLabel.setText(fragen.get(fragenIndex-1).getFrage());
-
                     answerAButton.setText(fragen.get(fragenIndex-1).getAntwortA());
                     answerBButton.setText(fragen.get(fragenIndex-1).getAntwortB());
                     answerCButton.setText(fragen.get(fragenIndex-1).getAntwortC());
                     answerDButton.setText(fragen.get(fragenIndex-1).getAntwortD());
 
+                    //bild mit dem aktuellen index anzeigen 
                     String path = fragen.get(fragenIndex-1).getImage();
                     questionImageIcon.setImage(new ImageIcon(path).getImage());
+                    //vorheriges Bild wird von Label entfernt und das neue angezeigt
                     questionImageLabel.repaint();
 
+                    //Antwort Buttons werden wieder aktivieren 
                     answerAButton.setEnabled(true);
                     answerBButton.setEnabled(true);    
                     answerCButton.setEnabled(true);
                     answerDButton.setEnabled(true);
 
+                    //Schriftfarbe bei allen buttons auf weiß gesetzt 
                     answerAButton.setBackground(Color.WHITE);
                     answerBButton.setBackground(Color.WHITE);
                     answerCButton.setBackground(Color.WHITE);
                     answerDButton.setBackground(Color.WHITE);
+                    //Sekunden vom Spiel Countdown auf 30 Sekunden setzen 
                     second = 30;
+                    //Zeit an das Label setzen
                     timerLabel.setText("Zeit: " + second);
+                    //Countdwon starten
                     quizTimer.start();
-                } else {
-                    /*HIER */
-                    EndScreen.showEndScreen(mainScreenWindow, inGameBarPanel, questionPanel, questionImagePanel, answerPanel, nextButton, scoreCount, quizTimer);
-                }
-                if (fragenIndex == 10) {
-                    nextButton.setText("Quiz-Ende >");
-                } else {
+                    //setze Text vom next Button auf überspringen
                     nextButton.setText("überspringen >");
+                } else {
+                    //wenn der Fragenindex gleich 10 ist, wird der End-Bildschirm angezeigt
+                    EndScreen.showEndScreen(mainScreenWindow, inGameBarPanel, questionPanel, questionImagePanel, answerPanel, nextButtonPanel, scoreCount, quizTimer);
+                }
+
+                if (fragenIndex == fragen.size()) {
+                    nextButton.setText("Quiz-Ende >");
                 }
             }
         });
 
-        nextButton.addMouseListener(new MouseListener() {
+        //Event-Handling für den next button panel
+        //wenn die Maus den Panel vom nextButton betritt, so ändert sich der Cursor
+        nextButtonPanel.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 
@@ -334,15 +354,20 @@ public class InGameScreen {
             }
         });
 
-        //Correct and Wrong answer
+        //Richtige und falsche Antwort
+        //Neuen ActionListener erstellen
         ActionListener actionListener = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                //den Button bekommen, der geklickt wurde
                 JButton chosenAnswer = (JButton) e.getSource();
+                //Soundeffekt-Pfade
                 String correctAnswerSoundEffect = ".//sounds//correct.wav";
                 String wrongAnswerSoundEffect = ".//sounds//wrong.wav";
+                //String für die Richtige Antwort
                 String correctAnswer = "";
 
+                //richtige Antwort von der aktuellen Frage in den String setzen
                 switch (fragen.get(fragenIndex-1).getRichtigeAntwort()) {
                     case 'A': correctAnswer = fragen.get(fragenIndex-1).getAntwortA();
                         break;
@@ -356,25 +381,35 @@ public class InGameScreen {
                         break;
                 }              
 
+                //Bedingung: Vergleich des Textes des angeklickten Buttons mit der richtigen Antwort der aktuellen Frage
                 if (chosenAnswer.getText().equals(correctAnswer)) {
+                    //Timer wird gestoppt
                     quizTimer.stop();
+                    //Die Punkte werden um eins erhöht und in den Label gesetzt
                     scoreCount++;
                     scoreLabel.setText("Punkte: " + scoreCount);
+                    //der passende Soundeffekt wird abgespielt
                     gameSoundEffect.setFile(correctAnswerSoundEffect);
                     gameSoundEffect.startSoundEffect();
+                    //Die Farbe des Buttons wird auf grün gesetzt 
                     chosenAnswer.setBackground(Color.GREEN);
-                    
-                    if (fragenIndex == 10) {
+                    //veränderung des next Button textes, je nach index
+                    if (fragenIndex == fragen.size()) {
                         nextButton.setText("Quiz-Ende >");
                     } else {
                         nextButton.setText("nächste Frage >");
                     }
-                    
+                //wenn die falsche Antwortmöglichkeit ausgewählt wurde    
                 } else {
+                    //Timer wird gestoppt
                     quizTimer.stop();
+                    //der passende Soundeffekt wird abgespielt
                     gameSoundEffect.setFile(wrongAnswerSoundEffect);
                     gameSoundEffect.startSoundEffect();
+                    //Die Farbe des Buttons wird auf rot gesetzt 
                     chosenAnswer.setBackground(Color.RED);
+
+                    //Der button mit der richtigen Antwort wird angezeigt und die Farbe auf grün gesetzt
                     switch (fragen.get(fragenIndex-1).getRichtigeAntwort()) {
                         case 'A':answerAButton.setBackground(Color.GREEN);
                             break;
@@ -387,9 +422,15 @@ public class InGameScreen {
                         default:
                             break;
                     }
+                    //veränderung des next Button textes, je nach index
+                    if (fragenIndex == fragen.size()) {
+                        nextButton.setText("Quiz-Ende >");
+                    } else {
+                        nextButton.setText("nächste Frage >");
+                    }
 
                 }
-
+                //Die Buttons werden deaktiviert
                 answerAButton.setEnabled(false);
                 answerBButton.setEnabled(false);    
                 answerCButton.setEnabled(false);
@@ -397,11 +438,13 @@ public class InGameScreen {
             }
         };
 
+        //an allen Antwort Buttons wird ein Aktion Listener hinzugefügt und der erstelle Action Listener übergeben
         answerAButton.addActionListener(actionListener);
         answerBButton.addActionListener(actionListener);
         answerCButton.addActionListener(actionListener);
         answerDButton.addActionListener(actionListener);
 
+        //Der Hintergrund wird gesetzt
         inGameBackgroundImage = new ImageIcon(".//res//quiz/background.jpg");
         inGameBackgroundImage.setImage(inGameBackgroundImage.getImage().getScaledInstance(MAINSCREEN_WIDTH, MAINSCREEN_HEIGHT, Image.SCALE_DEFAULT));
         inGameBackgroundPanel = new JPanel();
@@ -417,11 +460,14 @@ public class InGameScreen {
     
     //quiz countdown
     public static void quizCountdown(ArrayList<Frage> fragen) {
+        //Der Timer wird jede Sekunde aktualisiert 
         quizTimer = new Timer(1000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                //Die sekunden werden um eins verringert
                 second--;
 
+                //wenn die nullte Sekunde erreicht wird, wird die richtige Antwort angezeigt
                 if (second == 0) {
                     quizTimer.stop();
                     switch (fragen.get(fragenIndex-1).getRichtigeAntwort()) {
@@ -436,18 +482,19 @@ public class InGameScreen {
                         default:
                             break;
                     }
-                    
-                    if (fragenIndex == 10) {
+                    //veränderung des next Button textes, je nach index
+                    if (fragenIndex == fragen.size()) {
                         nextButton.setText("Quiz-Ende >");
                     } else {
                         nextButton.setText("nächste Frage >");
                     }
-
+                    //Die Buttons werden deaktiviert
                     answerAButton.setEnabled(false);
                     answerBButton.setEnabled(false);    
                     answerCButton.setEnabled(false);
                     answerDButton.setEnabled(false);
                 } 
+                //Die Sekunden werden auf dem Label gesetzt
                 timerLabel.setText("Zeit: " + second);
             }
         });
