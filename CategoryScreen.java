@@ -289,8 +289,35 @@ public class CategoryScreen {
                 // Kultur Quiz
                 ArrayList<Frage> cultureFragen = new ArrayList<Frage>();
                 cultureFragen.add(
-                                new Frage("Was ist Java?", "Donau", "Oka", "Wolgau", "Don",
-                                                ".//res//javaQuestions/test.png", 'C'));
+                        new Frage("Was ist die Hauptstadt von der Türkei?", "Ankara", "Capadoccia", "Istambul", "Izmil",
+                            ".//res//cultureQuestions/turkey.png", 'A'));
+                cultureFragen.add(
+                         new Frage("Welche Sprache wird in Filipinen gesprochen?", "Urdu", "Portugiesisch", "Tagalog", "Hindi",
+                            ".//res//cultureQuestions/filipinen.png", 'C'));
+                cultureFragen.add(
+                         new Frage("Welches Land ist bekannt für das Kolosseum?", "Griechenland", "Spanien", "Italien", "Frankreich",
+                            ".//res//cultureQuestions/kolosseum.jpg", 'C'));
+                cultureFragen.add(
+                          new Frage("Welcher Planet ist bekannt als der Rote Planet?", "Mars", "Saturn", "Urano", "Jupiter",
+                            ".//res//cultureQuestions/mars.jpg", 'A'));
+                 cultureFragen.add(
+                         new Frage("Wer hat die Relativitätstheorie formuliert?", "Isaac Newton", "Nikola Tesla", "Albert Einstein", "Galileo Galilei",
+                            ".//res//cultureQuestions/einstein.jpg", 'C'));
+                cultureFragen.add(
+                         new Frage("Welches ist das längste Fluss der Welt?", "Amazonas", "Nil", "Yangtse", "Mississippi",
+                            ".//res//cultureQuestions/nile.jpg", 'B'));
+                cultureFragen.add(
+                         new Frage("Wer schrieb 'Les Misérables'?", "Gabriel Garcia Marquez", "Victor Hugo", "Jorge Luis Borges", "Pablo Neruda",
+                            ".//res//cultureQuestions/hugo.jpg", 'B'));
+                cultureFragen.add(
+                         new Frage("Wer hat die Mona Lisa gemalt?", "Michelangelo", "Leonardo da Vinci", "Vincent van Gogh", "Pablo Picasso",
+                             ".//res//cultureQuestions/monal.jpg", 'B'));
+                 cultureFragen.add(
+                          new Frage("Wer hat die Chroniken von Narnia geschrieben?", "C.S. Lewis", "J.K. Rowling", "Shakespeare", "J.R.R. Tolkien",
+                            ".//res//cultureQuestions/narnia.jpg", 'A'));
+                 cultureFragen.add(
+                        new Frage("Was ist die Hauptstadt von Australien?", "Sidney", "Melbourne", "Adelaide", "Camberra",
+                             ".//res//cultureQuestions/aus.png", 'D'));
 
                 switch (zahl) {
                         case 1:
